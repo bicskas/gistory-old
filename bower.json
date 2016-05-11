@@ -1,0 +1,28 @@
+{
+  "name": "laravel",
+  "authors": [
+    "anti <antal.laszlo@ferling.hu>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Jcrop": "~2.0.4",
+    "bootstrap-select": "~1.9.4",
+    "bootstrap": "~3.3.6",
+    "ckeditor": "~4.5.7",
+    "dropzone": "~4.2.0",
+    "fancybox": "fancyBox#~2.1.5",
+    "jquery-form": "~3.46.0",
+    "smalot-bootstrap-datetimepicker": "~2.3.8",
+    "jquery-ui": "~1.11.4",
+    "jquery": "~2.2.0"
+  }
+}
