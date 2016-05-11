@@ -1,0 +1,18 @@
+footer {
+  background-color: #444;
+
+  >.container{
+    color: $feher;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    a{
+      color: $feher;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover{
+        color: $kek;
+      }
+    }
+  }
+}

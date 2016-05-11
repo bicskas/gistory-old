@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,400italic&subset=latin,latin-ext);
 @import "_bootstrap.scss";
 @import "_header.scss";
+@import "_footer.scss";
 
-h1{
-	color:black;
+body{
+	background-color: $gray-lighter;
 }

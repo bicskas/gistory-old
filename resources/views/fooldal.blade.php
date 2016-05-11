@@ -1,8 +1,12 @@
 @extends('layout/default')
 
 @section('content')
-
-	<h1>OK!</h1>
+    <section id="fooldal">
+        <div class="container">
+            <h1>Gistory</h1>
+            <h2>Hálóat ábrázoló, elemző és összehasonlító webalkalmazás</h2>
+        </div>
+    </section>
 
 
 @endsection
