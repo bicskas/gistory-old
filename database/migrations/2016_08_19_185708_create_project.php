@@ -12,7 +12,12 @@ class CreateProject extends Migration
      */
     public function up()
     {
-        //
+	    Schema::create('project', function(Blueprint $table) {
+		    $table->increments('id');
+		    $table->string('cim', 255);
+		    $table->string('leiras', 255);
+		    $table->text('szoveg');
+	    });
     }
 
     /**
@@ -22,6 +27,7 @@ class CreateProject extends Migration
      */
     public function down()
     {
-        //
+	    Schema::drop('project');
+
     }
 }
