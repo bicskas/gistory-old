@@ -4,8 +4,7 @@
     <section id="fooldal">
         <div class="container">
             <h1>Gistory</h1>
-            <h2>Hálóz
-                at ábrázoló, elemző és összehasonlító webalkalmazás</h2>
+            <h2>Hálózat ábrázoló, elemző és összehasonlító webalkalmazás</h2>
         </div>
     </section>
 

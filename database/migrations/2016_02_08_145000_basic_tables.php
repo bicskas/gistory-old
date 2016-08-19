@@ -54,8 +54,8 @@ class BasicTables extends Migration {
 	}
 
 	public function down() {
-		Schema::drop('szoveg');
 		Schema::drop('menu');
+		Schema::drop('szoveg');
 	}
 
 }

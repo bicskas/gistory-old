@@ -3,6 +3,7 @@
 return array(
 	'menu' => 'Menü|Menük',
 	'szoveg' => 'Szöveg|Szövegek',
+	'project' => 'Projekt|Projektek',
 	
 	'enum' => array(
 		'menu' => array(

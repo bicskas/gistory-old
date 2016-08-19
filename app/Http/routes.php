@@ -2,6 +2,7 @@
 
 Route::model('menu', 'App\Menu');
 Route::model('szoveg', 'App\Szoveg');
+Route::model('project', 'App\Project');
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::group(['middleware' => ['web']], function() {
 	Route::controller('admin/auth', 'Admin\AuthController');
 	Route::controller('auth', 'Auth\AuthController');
 	Route::get('/', 'FooldalController@index');
+	Route::get('/project', 'ProjectController@index');
+	Route::resource('project', 'ProjectController');
 
 	Route::group(['middleware' => 'auth'], function() {
 		Route::get('/home', 'FooldalController@index');

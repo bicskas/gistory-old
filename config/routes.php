@@ -7,7 +7,7 @@ return array(
 //		),
 //		array(
 //			'action' => 'kuld',
-//			'as' => 'kapcsolat.kapcsolat',
+//			'as' => 'met.met',
 //			'method' => 'post',
 //			'url' => '/kapcsolat',
 //		),

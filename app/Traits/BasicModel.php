@@ -13,6 +13,11 @@ trait BasicModel {
 		return '/admin/' . $this->className() . '/' . $this->getRouteKey();
 	}
 
+	public function createLink() {
+//		return route('admin.' . $this->className() . '.show', $this);
+		return $this->className() . '/' . $this->getRouteKey();
+	}
+
 	public function className() {
 		return snake_case(class_basename(__CLASS__));
 	}

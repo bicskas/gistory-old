@@ -91,5 +91,6 @@ return array(
 		'uzenet' => 'Üzenet',
 		'menu_id' => 'Szülő menü',
 		'file' => 'Fájl',
+		'leiras' => 'Leírás',
 	),
 );
