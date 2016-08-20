@@ -9,4 +9,4 @@ Homestead.json
 #public/css/*
 #public/js/*
 .idea/*
-node_modules/*
+/node_modules
