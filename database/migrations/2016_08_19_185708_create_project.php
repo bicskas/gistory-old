@@ -17,6 +17,7 @@ class CreateProject extends Migration
 		    $table->string('cim', 255);
 		    $table->string('leiras', 255);
 		    $table->text('szoveg');
+		    $table->timestamps();
 	    });
     }
 
