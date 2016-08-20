@@ -39,4 +39,14 @@ class Node extends Model
 	public function getLink() {
 		return route($this->className(), $this->link);
 	}
+
+	public function project(){
+		return $this->belongsTo('App\Project','project_id','id');
+	}
+
+	public function edge()
+	{
+		return $this->belongsToMany('App\Node','edge','node1_id','node2_id');
+	}
+
 }

@@ -8,3 +8,4 @@ Homestead.json
 #public/build/*
 #public/css/*
 #public/js/*
+.idea/*
