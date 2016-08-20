@@ -15,8 +15,10 @@ class CreateNode extends Migration
         Schema::create('node', function(Blueprint $table) {
             $table->increments('id');
             $table->string('nev', 255);
-            $table->integer('project_id',false,true);
+            $table->integer('project_id',false,true)->nullable();
             $table->foreign('project_id')->references('id')->on('project')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unique(array('nev', 'project_id'));
         });
     }
 

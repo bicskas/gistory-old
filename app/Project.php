@@ -41,4 +41,8 @@ class Project extends Model
 	public function getLink() {
 		return route($this->className(), $this->link);
 	}
+
+	public function node(){
+		return $this->hasMany('App\Node','project_id','id');
+	}
 }

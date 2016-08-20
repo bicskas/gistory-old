@@ -6,7 +6,12 @@
 
 {!! Form::submit('Új hozzáadása',['class' => 'btn btn-primary']) !!}
 {!! Form::close() !!}
+<hr style="border-color: #ddd">
+<h5>Nevek</h5>
+<ul class="list-group">
 
-@foreach($nodes as $node)
-
+    @foreach($nodes as $node)
+        <li class="list-group-item">{!! $node->nev !!}</li>
     @endforeach
+
+</ul>

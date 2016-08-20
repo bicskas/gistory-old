@@ -32,5 +32,33 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+/*
+
+	var $kereses_mezo = $('#nev1');
+	if ($kereses_mezo.length) {
+		var kepviselok = new Bloodhound({
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: '/kereses/'+ $kereses_mezo.data('projectid')+'/%nev',
+				wildcard: '%nev'
+			},
+			limit: 20
+		});
+
+		kepviselok.initialize();
+
+		$('#typeahead .typeahead').typeahead(null, {
+			name: 'kepviselo-nev',
+			displayKey: 'nev',
+			source: kepviselok.ttAdapter(),
+			hint: true,
+			highlight: true,
+			minLength: 2,
+			limit: 10
+		});
+	}
+*/
+
 });
 //# sourceMappingURL=app.js.map

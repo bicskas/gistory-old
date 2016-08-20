@@ -20,6 +20,8 @@ class CreateEdge extends Migration
             $table->integer('node2_id',false,true);
             $table->foreign('node1_id')->references('id')->on('node')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('node2_id')->references('id')->on('node')->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unique(array('node1_id', 'node2_id'));
         });
     }
 
