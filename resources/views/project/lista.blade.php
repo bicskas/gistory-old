@@ -22,7 +22,7 @@
                                         {!! $l->leiras !!}
                                     </div>
                                     <div class="panel-footer">
-                                        <a class="btn btn-primary btn-xs text-right" href="/network/create">
+                                        <a class="btn btn-primary btn-xs text-right" href="/network/{!! $l->id !!}">
                                             <span class="glyphicon glyphicon-plus"></span> Kapcsolatok
                                         </a>
                                         <a class="btn btn-danger btn-xs torol" title="Töröl" href="{{$l->createLink()}}">

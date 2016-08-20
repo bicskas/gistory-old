@@ -32,7 +32,10 @@ Route::group(['middleware' => ['web']], function() {
 	Route::controller('auth', 'Auth\AuthController');
 	Route::get('/', 'FooldalController@index');
 	Route::get('/project', 'ProjectController@index');
+	Route::get('/network/{projectid}', 'NetworkController@index');
+	Route::post('/network/{projectid}/node', 'NetworkController@createNode');
 	Route::resource('project', 'ProjectController');
+//	Route::resource('network', 'NetworkController');
 
 	Route::group(['middleware' => 'auth'], function() {
 		Route::get('/home', 'FooldalController@index');
