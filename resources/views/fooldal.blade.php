@@ -6,6 +6,8 @@
             <h1>Gistory</h1>
             <h2>Hálóat ábrázoló, elemző és összehasonlító webalkalmazás</h2>
         </div>
+
+        <div
     </section>
 
 
