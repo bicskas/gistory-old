@@ -17,7 +17,7 @@
                         {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','autocomplete' => 'off','id'=>'nev2','data-projectid' => $projectid]) }}
                     </div>
                     <div class="form-group col-sm-7">
-                        {!! Form::submit() !!}
+                        {!! Form::submit('Él hozzáadása') !!}
                     </div>
                     {!! Form::close() !!}
                 </div>
