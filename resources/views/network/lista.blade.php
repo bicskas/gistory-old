@@ -9,12 +9,12 @@
                     {!! Form::open(['class' => 'form-horizontal','url' => "/network/$projectid/edge"]) !!}
                     <div class="form-group col-sm-7">
                         {{ Form::label('nev1', 'Név') }}
-                        {{ Form::text('nev1','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','autocomplete' => 'off','id'=>'nev1','data-projectid' => $projectid]) }}
+                        {{ Form::text('nev1','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev1','data-projectid' => $projectid]) }}
                     </div>
 
                     <div class="form-group col-sm-7">
                         {{ Form::label('nev2', 'Név') }}
-                        {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','autocomplete' => 'off','id'=>'nev2','data-projectid' => $projectid]) }}
+                        {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev2','data-projectid' => $projectid]) }}
                     </div>
                     <div class="form-group col-sm-7">
                         {!! Form::submit('Él hozzáadása') !!}
