@@ -51,6 +51,7 @@
 
 						<div role="tabpanel" class="tab-pane" id="download">
 							<div class="well" style="max-width:300px">
+								<h5>70</h5>
 								<a href="/download/{{$projectid}}/nodes" class="btn btn-primary btn-block">Csúcsok
 									letöltése</a>
 								<a href="/download/{{$projectid}}/edges" class="btn btn-primary btn-block">Élek
