@@ -77,7 +77,7 @@ class NetworkController extends Controller
 				$i = 2;
 				foreach ($adatok as $n => $szemely) {
 					$sheet->row($i+$n, array(
-						$n + 1, $szemely->nev
+						$n + 70, $szemely->nev
 					));
 				}
 
