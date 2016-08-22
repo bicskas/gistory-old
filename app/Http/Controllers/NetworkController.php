@@ -95,7 +95,7 @@ class NetworkController extends Controller
 
 		$nodes = [];
 		foreach ($adatok as $n =>$node) {
-			$nodes[$node->id] = $n +1 ;
+			$nodes[$node->id] = $n + 70 ;
 		}
 		$edges = [];
 
