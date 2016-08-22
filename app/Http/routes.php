@@ -37,6 +37,8 @@ Route::group(['middleware' => ['web']], function() {
 	Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
 	Route::resource('project', 'ProjectController');
 //	Route::resource('network', 'NetworkController');
+	Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
+	Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');
 
 	Route::group(['middleware' => 'auth'], function() {
 		Route::get('/home', 'FooldalController@index');
