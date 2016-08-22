@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.14 on 2016-04-27.
+ * Generated for Laravel 5.2.14 on 2016-08-22.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1900,27 +1900,39 @@ namespace {
         }
         
         /**
+         * Store multiple items in the cache for a given number of minutes.
+         *
+         * @param array $values
+         * @param int $minutes
+         * @return void 
+         * @static 
+         */
+        public static function putMultiple($values, $minutes){
+            \Illuminate\Cache\ArrayStore::putMultiple($values, $minutes);
+        }
+        
+        /**
          * Increment the value of an item in the cache.
          *
          * @param string $key
          * @param mixed $value
-         * @return int|bool 
+         * @return int 
          * @static 
          */
         public static function increment($key, $value = 1){
-            return \Illuminate\Cache\MemcachedStore::increment($key, $value);
+            return \Illuminate\Cache\ArrayStore::increment($key, $value);
         }
         
         /**
-         * Decrement the value of an item in the cache.
+         * Increment the value of an item in the cache.
          *
          * @param string $key
          * @param mixed $value
-         * @return int|bool 
+         * @return int 
          * @static 
          */
         public static function decrement($key, $value = 1){
-            return \Illuminate\Cache\MemcachedStore::decrement($key, $value);
+            return \Illuminate\Cache\ArrayStore::decrement($key, $value);
         }
         
         /**
@@ -1930,17 +1942,7 @@ namespace {
          * @static 
          */
         public static function flush(){
-            \Illuminate\Cache\MemcachedStore::flush();
-        }
-        
-        /**
-         * Get the underlying Memcached connection.
-         *
-         * @return \Memcached 
-         * @static 
-         */
-        public static function getMemcached(){
-            return \Illuminate\Cache\MemcachedStore::getMemcached();
+            \Illuminate\Cache\ArrayStore::flush();
         }
         
         /**
@@ -1950,18 +1952,7 @@ namespace {
          * @static 
          */
         public static function getPrefix(){
-            return \Illuminate\Cache\MemcachedStore::getPrefix();
-        }
-        
-        /**
-         * Set the cache key prefix.
-         *
-         * @param string $prefix
-         * @return void 
-         * @static 
-         */
-        public static function setPrefix($prefix){
-            \Illuminate\Cache\MemcachedStore::setPrefix($prefix);
+            return \Illuminate\Cache\ArrayStore::getPrefix();
         }
         
     }
