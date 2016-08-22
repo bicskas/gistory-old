@@ -77,7 +77,7 @@ class NetworkController extends Controller
 				$i = 2;
 				foreach ($adatok as $n => $szemely) {
 					$sheet->row($i+$n, array(
-						$n + 70, $szemely->nev
+						$n + 1, $szemely->nev
 					));
 				}
 
@@ -95,7 +95,7 @@ class NetworkController extends Controller
 
 		$nodes = [];
 		foreach ($adatok as $n =>$node) {
-			$nodes[$node->id] = $n + 70 ;
+			$nodes[$node->id] = $n + 1 ;
 		}
 		$edges = [];
 
