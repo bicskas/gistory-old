@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+
 
 class AuthController extends Controller {
 	/*
@@ -34,13 +36,13 @@ class AuthController extends Controller {
 	 * @return void
 	 */
 	public function __construct() {
-		
+
 		parent::__construct();
-//		$this->redirectPath = '/home';
-//		$this->redirectAfterLogout = '/';
-//		$this->loginPath = '/auth/login';
-//		$this->username = 'email';
-		
+		$this->redirectPath = '/home';
+		$this->redirectAfterLogout = '/';
+		$this->loginPath = '/auth/login';
+		$this->name = 'email';
+
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
@@ -51,7 +53,13 @@ class AuthController extends Controller {
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
 	protected function validator(array $data) {
-		return Validator::make($data, User::rules());
+		return Validator::make($data, User::rules() + array(
+				'password' => array(
+					'required',
+					'confirmed',
+					'min:6',
+				),
+			));
 	}
 
 	/**

@@ -28,20 +28,26 @@ Route::group(['middleware' => ['web']], function() {
 
 	});
 
-	Route::controller('admin/auth', 'Admin\AuthController');
-	Route::controller('auth', 'Auth\AuthController');
-	Route::get('/', 'FooldalController@index');
-	Route::get('/project', 'ProjectController@index');
-	Route::get('/network/{projectid}', 'NetworkController@index');
-	Route::post('/network/{projectid}/node', 'NetworkController@createNode');
-	Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
-	Route::resource('project', 'ProjectController');
-//	Route::resource('network', 'NetworkController');
-	Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
-	Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');
+	/*Route::controller('admin/auth', 'Admin\AuthController');
+	Route::controller('auth', 'Auth\AuthController');*/
+	Route::controllers([
+		'admin/auth' => 'Admin\AuthController',
+		'auth' => 'Auth\AuthController',
+		'password' => 'Auth\PasswordController',
+	]);
 
-	Route::group(['middleware' => 'auth'], function() {
+
+	Route::group(['middleware' => 'auth'], function($router) {
 		Route::get('/home', 'FooldalController@index');
+		Route::get('/', 'FooldalController@index');
+		Route::get('/project', 'ProjectController@index');
+		Route::get('/network/{projectid}', 'NetworkController@index');
+		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
+		Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
+		Route::resource('project', 'ProjectController');
+//	Route::resource('network', 'NetworkController');
+		Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
+		Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');
 	});
 
 	// ----- menü route-ok generálása -----

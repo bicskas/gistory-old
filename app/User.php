@@ -11,7 +11,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use App\Traits\BasicModel;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+{
 
 	use Authenticatable, CanResetPassword, EntrustUserTrait, BasicModel;
 
@@ -27,7 +28,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'last_login'];
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+		'last_login'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -36,7 +41,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-	protected function rules() {
+	protected function rules()
+	{
 		return [
 			'name' => array(
 				'required',
@@ -48,15 +54,30 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 				'max:255',
 				'unique:users',
 			),
-			'password' => array(
+			/*'password' => array(
 				'required',
 				'confirmed',
 				'min:6',
-			),
+			),*/
 		];
 	}
 
-	public function accessMediasAll() {
-		 return $this->hasRole('admin');
+	public function save(array $options = array()) {
+		if (empty($this->hash)) {
+			$this->hash = sha1($this->email . time());
+		}
+		return parent::save($options);
+	}
+
+	public function setPasswordAttribute($value)
+	{
+		if (!empty($value)) {
+			$this->attributes['password'] = bcrypt($value);
+		}
+	}
+
+	public function accessMediasAll()
+	{
+		return $this->hasRole('admin');
 	}
 }

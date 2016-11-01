@@ -45,6 +45,20 @@
                     <li><a href="/project">Projektek</a></li>
                 </ul>
 
+                <ul class="nav navbar-nav navbar-right">
+                    @if(Auth::user())
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-text">Belépve: <strong>{!! Auth::user()->name !!}</strong></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/admin/auth/logout"><span class="glyphicon glyphicon-log-out"></span> Kilépés</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endif
+                </ul>
+
             </div>
         </div>
     </nav>
@@ -60,7 +74,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-            <p>{!! date('Y') !!} BicskS</p>
+                <p>{!! date('Y') !!} BicskS</p>
             </div>
             <div class="col-sm-6 text-right">
                 {!! HTML::mailto('kriszbacherg@gmail.com','Küldjön e-mailt',['class' => '']) !!}
