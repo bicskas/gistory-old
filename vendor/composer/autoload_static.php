@@ -355,12 +355,13 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
 
     public static $classMap = array (
         'AdminSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
-        'AlterUser' => __DIR__ . '/../..' . '/database/migrations/2016_11_01_200007_alter_user.php',
         'BasicTables' => __DIR__ . '/../..' . '/database/migrations/2016_02_08_145000_basic_tables.php',
-        'CreateEdge' => __DIR__ . '/../..' . '/database/migrations/2016_08_19_222506_create_edge.php',
+        'CreateEdge' => __DIR__ . '/../..' . '/database/migrations/2016_11_19_222506_create_edge.php',
         'CreateNode' => __DIR__ . '/../..' . '/database/migrations/2016_08_19_220402_create_node.php',
+        'CreateNodeattributes' => __DIR__ . '/../..' . '/database/migrations/2016_11_02_181148_create_nodeattributes.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateProject' => __DIR__ . '/../..' . '/database/migrations/2016_08_19_185708_create_project.php',
+        'CreateSubproject' => __DIR__ . '/../..' . '/database/migrations/2016_11_02_175334_create_subproject.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'EntrustSetupTables' => __DIR__ . '/../..' . '/database/migrations/2016_02_08_144547_entrust_setup_tables.php',

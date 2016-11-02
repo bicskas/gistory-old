@@ -7,12 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdminSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
-    'AlterUser' => $baseDir . '/database/migrations/2016_11_01_200007_alter_user.php',
     'BasicTables' => $baseDir . '/database/migrations/2016_02_08_145000_basic_tables.php',
-    'CreateEdge' => $baseDir . '/database/migrations/2016_08_19_222506_create_edge.php',
+    'CreateEdge' => $baseDir . '/database/migrations/2016_11_19_222506_create_edge.php',
     'CreateNode' => $baseDir . '/database/migrations/2016_08_19_220402_create_node.php',
+    'CreateNodeattributes' => $baseDir . '/database/migrations/2016_11_02_181148_create_nodeattributes.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProject' => $baseDir . '/database/migrations/2016_08_19_185708_create_project.php',
+    'CreateSubproject' => $baseDir . '/database/migrations/2016_11_02_175334_create_subproject.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'EntrustSetupTables' => $baseDir . '/database/migrations/2016_02_08_144547_entrust_setup_tables.php',

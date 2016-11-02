@@ -18,7 +18,6 @@ class CreateNode extends Migration
             $table->integer('project_id',false,true)->nullable();
             $table->foreign('project_id')->references('id')->on('project')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unique(array('nev', 'project_id'));
         });
     }
 

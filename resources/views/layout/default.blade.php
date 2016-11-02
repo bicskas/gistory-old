@@ -74,7 +74,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <p>{!! date('Y') !!} BicskS</p>
+                <p>{!! date('Y') !!} Kriszbacher Gergő</p>
             </div>
             <div class="col-sm-6 text-right">
                 {!! HTML::mailto('kriszbacherg@gmail.com','Küldjön e-mailt',['class' => '']) !!}
@@ -83,6 +83,8 @@
     </div>
 </footer>
 
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
 {!! HTML::script(elixir('js/vendor.js')) !!}
 {!! HTML::script(elixir('js/app.js')) !!}
 </body>

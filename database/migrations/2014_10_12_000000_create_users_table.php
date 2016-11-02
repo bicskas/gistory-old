@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->rememberToken();
 			$table->timestamps();
 			$table->timestamp('last_login')->nullable();
+			$table->string('hash', 40)->nullable();
 		});
 	}
 
