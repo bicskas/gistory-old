@@ -37,6 +37,12 @@ class AdminSeeder extends Seeder {
 
 		$user->attachRole($role);
 
+		$user = User::create(array(
+			'name' => 'Kriszbacher Gergő',
+			'email' => 'bicskas94@gmail.com',
+			'password' => bcrypt('Kriszbakker'),
+		));
+
 	}
 
 }

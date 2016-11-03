@@ -29,6 +29,6 @@ class CreateSubproject extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('node');
+		Schema::drop('subproject');
 	}
 }

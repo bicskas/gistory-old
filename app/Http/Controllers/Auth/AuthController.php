@@ -41,8 +41,7 @@ class AuthController extends Controller {
 		$this->redirectPath = '/home';
 		$this->redirectAfterLogout = '/';
 		$this->loginPath = '/auth/login';
-		$this->name = 'email';
-
+		//this->name = 'email';
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
