@@ -13,6 +13,8 @@ class ProjectController extends Controller {
 
 		$this->class = 'project';
 		\View::share('aktiv_oldal', $this->class);
+
+		$this->user = \Auth::user();
 	}
 
 	public function index() {
@@ -30,7 +32,10 @@ class ProjectController extends Controller {
 
 		$data = $request->all();
 
-		$model->fill($data)->save();
+		$model->fill($data);//
+
+		$this->user->project()->save($model);
+
 
 
 		return redirect('/project')

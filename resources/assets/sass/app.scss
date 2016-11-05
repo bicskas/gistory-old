@@ -2,6 +2,8 @@
 @import "_bootstrap.scss";
 @import "_header.scss";
 @import "_footer.scss";
+@import "nodes/_circular.scss";
+@import "nodes/_force.scss";
 
 body{
 	background-color: $gray-lighter;
@@ -10,11 +12,12 @@ body{
 
 .node {
 	font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	fill: #bbb;
+	fill: #777;
 }
 
 .node:hover {
 	fill: #000;
+	font-size: 13px;
 }
 
 .link {

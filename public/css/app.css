@@ -5771,15 +5771,24 @@ footer {
       footer > .container a:hover {
         color: #005b96; }
 
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6; }
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px; }
+
 body {
   background-color: #eeeeee; }
 
 .node {
   font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  fill: #bbb; }
+  fill: #777; }
 
 .node:hover {
-  fill: #000; }
+  fill: #000;
+  font-size: 13px; }
 
 .link {
   stroke: steelblue;

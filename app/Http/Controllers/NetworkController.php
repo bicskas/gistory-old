@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Node as Model;
 use App\Http\Requests\ModelRequest;
+use File;
 use Illuminate\Http\Request;
 use Excel;
 
@@ -24,16 +25,28 @@ class NetworkController extends Controller
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
 		$edges = [];
 		foreach ($nodes as $n) {
+			$targets= [];
+
 			if ($n->has('edge')) {
 				$edges[] = $n;
+
+				foreach ($n->edge as $e){
+					$targets[] = $e->nev;
+				}
 			}
+			$json[] = ['name' => $n->nev,'size' => rand(600,16000), 'imports' => $targets];
 		}
 
+		$file = "json/".$projectid.'_'.\Auth::user()->id.".json";
+		File::put($file, json_encode($json));
+//		dd(json_encode($json));
 
 		return view('network.lista', array(
 			'nodes' => $nodes,
 			'edges' => $edges,
-			'projectid' => $projectid
+			'projectid' => $projectid,
+			'json' => json_encode($json),
+			'file' => $file
 		));
 	}
 
@@ -62,12 +75,13 @@ class NetworkController extends Controller
 
 	}
 
-	public function downloadNode($projectid){
+	public function downloadNode($projectid)
+	{
 
 		$project = Project::find($projectid);
 		$adatok = $project->node;
 
-		Excel::create(str_slug($project->cim), function ($excel) use ($adatok,$project) {
+		Excel::create(str_slug($project->cim), function ($excel) use ($adatok, $project) {
 			$excel->setTitle($project->cim);
 			$excel->sheet('Teljes hálózat', function ($sheet) use ($adatok) {
 
@@ -76,46 +90,47 @@ class NetworkController extends Controller
 				));
 				$i = 2;
 				foreach ($adatok as $n => $szemely) {
-					$sheet->row($i+$n, array(
+					$sheet->row($i + $n, array(
 						$n + 1, $szemely->nev
 					));
 				}
 
 			});
 
-		})->store('csv', public_path('excel/'.str_slug($project->cim)))->download('csv');;
+		})->store('csv', public_path('excel/' . str_slug($project->cim)))->download('csv');;
 
 		return redirect()->back();
 	}
 
-	public function downloadEdge($projectid){
+	public function downloadEdge($projectid)
+	{
 
 		$project = Project::find($projectid);
 		$adatok = $project->node;
 
 		$nodes = [];
-		foreach ($adatok as $n =>$node) {
-			$nodes[$node->id] = $n + 1 ;
+		foreach ($adatok as $n => $node) {
+			$nodes[$node->id] = $n + 1;
 		}
 		$edges = [];
 
-		foreach ($adatok as $node){
-			foreach ($node->edge as $edge){
+		foreach ($adatok as $node) {
+			foreach ($node->edge as $edge) {
 				$edges[] = $edge;
 			}
 		}
 
 
-		Excel::create(str_slug($project->cim)."_edges", function ($excel) use ($adatok,$project, $nodes) {
+		Excel::create(str_slug($project->cim) . "_edges", function ($excel) use ($adatok, $project, $nodes) {
 			$excel->setTitle($project->cim);
-			$excel->sheet('Teljes hálózat', function ($sheet) use ($adatok,$nodes) {
+			$excel->sheet('Teljes hálózat', function ($sheet) use ($adatok, $nodes) {
 
 				$sheet->row(1, array(
 					'Source', 'Target', 'Type', 'Id'
 				));
 				$i = 2;
-				foreach ($adatok as $node){
-					foreach ($node->edge as $edge){
+				foreach ($adatok as $node) {
+					foreach ($node->edge as $edge) {
 						$sheet->row($i, array(
 							$nodes[$edge->pivot->node1_id], $nodes[$edge->pivot->node2_id], 'undirected', ($i - 1)
 						));
@@ -136,12 +151,13 @@ class NetworkController extends Controller
 
 			});
 
-		})->store('csv', public_path('excel/'.str_slug($project->cim)))->download('csv');;
+		})->store('csv', public_path('excel/' . str_slug($project->cim)))->download('csv');;
 
 		return redirect()->back();
 	}
 
-	public function teszt(){
+	public function teszt()
+	{
 		/*$tabla = Excel::selectSheets('Munka1')->load(public_path('/userfiles/excel/kutatas.xlsx'));
 
   $adatok = $tabla->take(69)->toObject();
@@ -245,7 +261,7 @@ class NetworkController extends Controller
 					foreach ($szemely as $k => $kapcsolat) {
 						if ($k > $n && !is_null($kapcsolat)) {
 							$sheet->row($i, array(
-								$n + 1, $k, 'undirected', ($i - 1), config('edge.' . $kapcsolat), 1, '255 , 0, 0',  $kapcsolat
+								$n + 1, $k, 'undirected', ($i - 1), config('edge.' . $kapcsolat), 1, '255 , 0, 0', $kapcsolat
 							));
 							$i++;
 						}

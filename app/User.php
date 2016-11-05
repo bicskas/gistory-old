@@ -80,4 +80,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	{
 		return $this->hasRole('admin');
 	}
+
+	public function project(){
+		return $this->hasOne('App\Project', 'user_id', 'id');
+	}
 }

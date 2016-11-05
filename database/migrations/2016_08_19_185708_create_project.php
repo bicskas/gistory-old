@@ -14,7 +14,7 @@ class CreateProject extends Migration
 	{
 		Schema::create('project', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('user_id', false, true);
+			$table->integer('user_id', false, true)->nullable();
 		    $table->string('cim', 255);
 		    $table->string('leiras', 255);
 		    $table->text('szoveg');

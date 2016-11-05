@@ -23,7 +23,7 @@ class AuthenticateAdmin {
 			return response('Unauthorized.', 401);
 		} else {
 			$this->auth->logout();
-			return redirect()->guest('admin/auth/login');
+			return redirect()->guest('auth/login');
 		}
 	}
 

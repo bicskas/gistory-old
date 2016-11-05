@@ -34,6 +34,7 @@ abstract class Controller extends BaseController {
 
 		$fomenu = Menu::orderByRaw(Menu::$sorting)->aktiv()->fomenu()->get();
 		View::share('fomenu', $fomenu);
+
 	}
 
 }
