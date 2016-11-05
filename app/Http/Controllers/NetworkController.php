@@ -24,29 +24,40 @@ class NetworkController extends Controller
 
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
 		$edges = [];
+		$json = [];
+		$force = ['nodes' => [], 'links' => []];
 		foreach ($nodes as $n) {
-			$targets= [];
+			$targets = [];
 
+			$force['nodes'][] = ['id' => $n->nev, 'group' => 1];
 			if ($n->has('edge')) {
 				$edges[] = $n;
 
-				foreach ($n->edge as $e){
+				foreach ($n->edge as $e) {
 					$targets[] = $e->nev;
+					$force['links'][] = ['source' => $n->nev, 'target' => $e->nev, 'value' => 1];
 				}
 			}
-			$json[] = ['name' => $n->nev,'size' => rand(600,16000), 'imports' => $targets];
+			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+
+//			$force['links'] = array_add(['source'=> $n->nev,'target' => 1,'value' => 1]);
 		}
 
-		$file = "json/".$projectid.'_'.\Auth::user()->id.".json";
+//		dd(json_encode($force));
+		$file = "json/" . $projectid . '_' . \Auth::user()->id . ".json";
 		File::put($file, json_encode($json));
-//		dd(json_encode($json));
+
+		$forcefile = "json/" . $projectid . '_' . \Auth::user()->id . "force.json";
+		File::put($forcefile, json_encode($force));
 
 		return view('network.lista', array(
 			'nodes' => $nodes,
 			'edges' => $edges,
 			'projectid' => $projectid,
 			'json' => json_encode($json),
-			'file' => $file
+			'force' => json_encode($force),
+			'file' => $file,
+			'forcefile' => $forcefile
 		));
 	}
 
