@@ -26,6 +26,16 @@ class ProjectController extends Controller {
 		));
 	}
 
+	public function subproject(Model $model,$projectid){
+
+		$lista = $model->subproject;
+
+		return view('subproject.lista', array(
+			'lista' => $lista,
+			'projectid' => $projectid
+		));
+	}
+
 
 
 	private function save(ModelRequest $request, Model $model) {

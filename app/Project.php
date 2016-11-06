@@ -45,4 +45,8 @@ class Project extends Model
 	public function node(){
 		return $this->hasMany('App\Node','project_id','id');
 	}
+
+	public function subproject(){
+		return $this->hasMany('App\Subproject','project_id','id');
+	}
 }

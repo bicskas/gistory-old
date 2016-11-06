@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Node as Model;
 use App\Http\Requests\ModelRequest;
+use App\Subproject;
 use File;
 use Illuminate\Http\Request;
 use Excel;
@@ -24,6 +25,20 @@ class NetworkController extends Controller
 	{
 
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
+
+		return view('network.nodes', array(
+			'nodes' => $nodes,
+			'projectid' => $projectid,
+		));
+	}
+
+
+	public function subprojectedge($projectid, $subprojectid)
+	{
+
+		$subproject = Subproject::find($subprojectid);
+
+		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
 		$edges = [];
 		$json = [];
 		$force = ['nodes' => [], 'links' => []];
@@ -32,8 +47,6 @@ class NetworkController extends Controller
 
 		$stocksTable->addStringColumn('Név')
 			->addNumberColumn('Fokszám');
-
-
 
 		foreach ($nodes as $n) {
 			$targets = [];
@@ -67,10 +80,8 @@ class NetworkController extends Controller
 		File::put($forcefile, json_encode($force));
 
 
-
 // Random Data For Example
-		$chart = Lava::BarChart('MyStocks', $stocksTable,['height' => 2000]);
-
+		$chart = Lava::BarChart('MyStocks', $stocksTable, ['height' => 2000]);
 
 
 		return view('network.lista', array(
@@ -320,7 +331,8 @@ class NetworkController extends Controller
 	}
 
 
-	public function destroy(Model $model) {
+	public function destroy(Model $model)
+	{
 		$model->delete();
 		return array(
 			'id' => $model->id,

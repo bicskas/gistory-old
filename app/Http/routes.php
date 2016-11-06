@@ -3,6 +3,7 @@
 Route::model('menu', 'App\Menu');
 Route::model('szoveg', 'App\Szoveg');
 Route::model('project', 'App\Project');
+Route::model('subproject', 'App\Subproject');
 Route::model('node', 'App\Node');
 
 /*
@@ -16,9 +17,9 @@ Route::model('node', 'App\Node');
 |
 */
 
-Route::group(['middleware' => ['web']], function() {
-	
-	Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function() {
+Route::group(['middleware' => ['web']], function () {
+
+	Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
 
 		Route::resource('menu', 'Admin\MenuController');
 		Route::resource('szoveg', 'Admin\SzovegController');
@@ -38,14 +39,17 @@ Route::group(['middleware' => ['web']], function() {
 	]);
 
 
-	Route::group(['middleware' => 'auth'], function($router) {
+	Route::group(['middleware' => 'auth'], function ($router) {
 		Route::get('/home', 'FooldalController@index');
 		Route::get('/', 'FooldalController@index');
 		Route::get('/project', 'ProjectController@index');
+		Route::get('/project/{id}/subproject', 'ProjectController@subproject');
 		Route::get('/network/{projectid}', 'NetworkController@index');
+		Route::get('/network/{projectid}/{subprojectid}', 'NetworkController@subprojectedge');
 		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
 		Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
 		Route::resource('project', 'ProjectController');
+		Route::resource('/project/{id}/subproject', 'SubprojectController');
 		Route::resource('/network/node', 'NetworkController');
 //	Route::resource('network', 'NetworkController');
 		Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
