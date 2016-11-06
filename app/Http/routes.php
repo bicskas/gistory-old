@@ -3,6 +3,7 @@
 Route::model('menu', 'App\Menu');
 Route::model('szoveg', 'App\Szoveg');
 Route::model('project', 'App\Project');
+Route::model('node', 'App\Node');
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::group(['middleware' => ['web']], function() {
 		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
 		Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
 		Route::resource('project', 'ProjectController');
+		Route::resource('/network/node', 'NetworkController');
 //	Route::resource('network', 'NetworkController');
 		Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
 		Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');

@@ -293,4 +293,12 @@ class NetworkController extends Controller
 		));
 	}
 
+
+	public function destroy(Model $model) {
+		$model->delete();
+		return array(
+			'id' => $model->id,
+		);
+	}
+
 }

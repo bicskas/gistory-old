@@ -32,6 +32,24 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	// törlés gomb
+	$(document).on('click', '.torol', function(e) {
+		e.preventDefault();
+		if (confirm('Biztos benne?')) {
+			var $this = $(this);
+			$.ajax({
+				url: $this.attr('href'),
+				method: 'DELETE',
+				success: function(resp) {
+					$('#item_' + resp.id).remove();
+				},
+				error: function() {
+					alert('Hiba történt');
+				}
+			});
+		}
+	});
+
 
 	/*
 

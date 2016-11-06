@@ -11,7 +11,9 @@
 <ul class="list-group">
 
     @foreach($nodes as $node)
-        <li class="list-group-item">{!! $node->nev !!}</li>
+        <li class="list-group-item">{!! $node->nev !!}<span class="pull-right"><a class="btn btn-danger btn-xs torol" title="Töröl" href="{{$node->createLink()}}">
+                                            <span class="glyphicon glyphicon-trash"></span> Töröl
+                                        </a></span></li>
     @endforeach
 
 </ul>
