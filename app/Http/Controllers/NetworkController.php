@@ -40,61 +40,42 @@ class NetworkController extends Controller
 		$subproject = Subproject::find($subprojectid);
 
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
-		$edges = [];
 		$json = [];
 		$force = ['nodes' => [], 'links' => []];
 
-		$stocksTable = Lava::DataTable();  // Lava::DataTable() if using Laravel
-
-		$stocksTable->addStringColumn('Név')
-			->addNumberColumn('Fokszám');
-
 		foreach ($nodes as $n) {
 			$targets = [];
-
 			$force['nodes'][] = ['id' => $n->nev, 'group' => 1];
-			if ($n->has('edge')) {
-				$edges[] = $n;
 
-				foreach ($n->edge as $e) {
-					$targets[] = $e->nev;
-					$force['links'][] = ['source' => $n->nev, 'target' => $e->nev, 'value' => 1];
-				}
+			foreach ($subproject->edge as $e) {
+				$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => 1];
 			}
-			$stocksTable->addRow([
-				$n->nev, count($n->edge)
-			]);
+
+			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
+				$targets[] = $e->nev;
+			}
+
 			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
-
 			$nevek[] = $n->nev;
-			$degree[] = count($n->edge);
+			$degree[] = count($subproject->edge()->where('node1_id', $n->id)->orWhere('node2_id', $n->id)->get());
 
-//			$force['links'] = array_add(['source'=> $n->nev,'target' => 1,'value' => 1]);
 		}
 
-//		dd(json_encode($force));
 		$file = "json/" . $projectid . '_' . \Auth::user()->id . ".json";
 		File::put($file, json_encode($json));
 
 		$forcefile = "json/" . $projectid . '_' . \Auth::user()->id . "force.json";
 		File::put($forcefile, json_encode($force));
 
-
-// Random Data For Example
-		$chart = Lava::BarChart('MyStocks', $stocksTable, ['height' => 2000]);
-
-
 		return view('network.lista', array(
 			'nodes' => $nodes,
-			'edges' => $edges,
 			'projectid' => $projectid,
-			'subprojectid' => $subprojectid,
+			'subproject' => $subproject,
 			'json' => json_encode($json),
 			'force' => json_encode($force),
 			'file' => $file,
 			'forcefile' => $forcefile,
-			'chart' => $chart,
 			'nevek' => json_encode($nevek),
 			'degree' => json_encode($degree),
 		));
@@ -112,20 +93,15 @@ class NetworkController extends Controller
 			->with('uzenet', 'Sikeres mentés!');
 	}
 
-	public function saveEdge(ModelRequest $request, Model $model, $projectid,$subprojectid)
+	public function saveEdge(ModelRequest $request, Model $model, $projectid, $subprojectid)
 	{
 		$subproject = Subproject::find($subprojectid);
 		$edge = new Edge();
 		$edge->node1_id = Project::find($projectid)->node()->whereNev($request->get('nev1'))->first()->id;
 		$edge->node2_id = Project::find($projectid)->node()->whereNev($request->get('nev2'))->first()->id;
-//		dd($edge);
-		dd($subproject->edge()->save($edge));
+		$subproject->edge()->save($edge);
 
-
-
-//		$node1->edge()->attach($node2);
-
-		return redirect('/network/' . $projectid)
+		return redirect('/network/' . $projectid . '/' . $subprojectid)
 			->with('uzenet', 'Sikeres mentette a kapcsolatot!');
 
 	}
