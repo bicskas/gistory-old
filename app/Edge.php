@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Edge extends Model
 {
 	protected $table = 'edge';
+	public $timestamps = false;
 }

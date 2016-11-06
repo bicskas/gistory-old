@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Edge;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\Node as Model;
@@ -88,6 +89,7 @@ class NetworkController extends Controller
 			'nodes' => $nodes,
 			'edges' => $edges,
 			'projectid' => $projectid,
+			'subprojectid' => $subprojectid,
 			'json' => json_encode($json),
 			'force' => json_encode($force),
 			'file' => $file,
@@ -110,13 +112,18 @@ class NetworkController extends Controller
 			->with('uzenet', 'Sikeres mentés!');
 	}
 
-	public function saveEdge(ModelRequest $request, Model $model, $projectid)
+	public function saveEdge(ModelRequest $request, Model $model, $projectid,$subprojectid)
 	{
+		$subproject = Subproject::find($subprojectid);
+		$edge = new Edge();
+		$edge->node1_id = Project::find($projectid)->node()->whereNev($request->get('nev1'))->first()->id;
+		$edge->node2_id = Project::find($projectid)->node()->whereNev($request->get('nev2'))->first()->id;
+//		dd($edge);
+		dd($subproject->edge()->save($edge));
 
-		$node1 = Project::find($projectid)->node()->whereNev($request->get('nev1'))->first();
-		$node2 = Project::find($projectid)->node()->whereNev($request->get('nev2'))->first();
 
-		$node1->edge()->attach($node2);
+
+//		$node1->edge()->attach($node2);
 
 		return redirect('/network/' . $projectid)
 			->with('uzenet', 'Sikeres mentette a kapcsolatot!');

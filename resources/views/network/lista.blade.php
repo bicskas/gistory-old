@@ -6,7 +6,7 @@
             <article id="edges-form">
                 <div class="row">
                     <h5>Új él hozzáadása</h5>
-                    {!! Form::open(['class' => 'form-horizontal','url' => "/network/$projectid/edge"]) !!}
+                    {!! Form::open(['class' => 'form-horizontal','url' => "/network/$projectid/$subprojectid/edge"]) !!}
                     <div class="form-group col-sm-7">
                         {{ Form::label('nev1', 'Név') }}
                         {{ Form::text('nev1','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev1','data-projectid' => $projectid]) }}

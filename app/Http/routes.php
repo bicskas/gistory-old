@@ -47,7 +47,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/network/{projectid}', 'NetworkController@index');
 		Route::get('/network/{projectid}/{subprojectid}', 'NetworkController@subprojectedge');
 		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
-		Route::post('/network/{projectid}/edge', 'NetworkController@saveEdge');
+		Route::post('/network/{projectid}/{subprojectid}/edge', 'NetworkController@saveEdge');
 		Route::resource('project', 'ProjectController');
 		Route::resource('/project/{id}/subproject', 'SubprojectController');
 		Route::resource('/network/node', 'NetworkController');
