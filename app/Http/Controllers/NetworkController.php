@@ -7,6 +7,7 @@ use App\Http\Requests\ModelRequest;
 use File;
 use Illuminate\Http\Request;
 use Excel;
+use Lava;
 
 class NetworkController extends Controller
 {
@@ -26,6 +27,14 @@ class NetworkController extends Controller
 		$edges = [];
 		$json = [];
 		$force = ['nodes' => [], 'links' => []];
+
+		$stocksTable = Lava::DataTable();  // Lava::DataTable() if using Laravel
+
+		$stocksTable->addStringColumn('Név')
+			->addNumberColumn('Fokszám');
+
+
+
 		foreach ($nodes as $n) {
 			$targets = [];
 
@@ -38,7 +47,14 @@ class NetworkController extends Controller
 					$force['links'][] = ['source' => $n->nev, 'target' => $e->nev, 'value' => 1];
 				}
 			}
+			$stocksTable->addRow([
+				$n->nev, count($n->edge)
+			]);
 			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+
+
+			$nevek[] = $n->nev;
+			$degree[] = count($n->edge);
 
 //			$force['links'] = array_add(['source'=> $n->nev,'target' => 1,'value' => 1]);
 		}
@@ -50,6 +66,13 @@ class NetworkController extends Controller
 		$forcefile = "json/" . $projectid . '_' . \Auth::user()->id . "force.json";
 		File::put($forcefile, json_encode($force));
 
+
+
+// Random Data For Example
+		$chart = Lava::BarChart('MyStocks', $stocksTable,['height' => 2000]);
+
+
+
 		return view('network.lista', array(
 			'nodes' => $nodes,
 			'edges' => $edges,
@@ -57,7 +80,10 @@ class NetworkController extends Controller
 			'json' => json_encode($json),
 			'force' => json_encode($force),
 			'file' => $file,
-			'forcefile' => $forcefile
+			'forcefile' => $forcefile,
+			'chart' => $chart,
+			'nevek' => json_encode($nevek),
+			'degree' => json_encode($degree),
 		));
 	}
 

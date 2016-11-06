@@ -84,4 +84,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	public function project(){
 		return $this->hasOne('App\Project', 'user_id', 'id');
 	}
+
 }

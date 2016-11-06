@@ -41,6 +41,10 @@
                         <li role="presentation">
                             <a href="#svg-kep" aria-controls="download" role="tab" data-toggle="tab">SVG</a>
                         </li>
+                        <li role="presentation">
+                            <a href="#statisztika" aria-controls="download" role="tab"
+                               data-toggle="tab">Statisztikák</a>
+                        </li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -67,6 +71,13 @@
                                 {{--<svg width="960" height="600"></svg>--}}
                                 <svg width="1140" height="800"></svg>
                             </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="statisztika">
+                            <div id="bar" data-nevek="{{$nevek}}" data-degree="{!! $degree !!}">
+                                <svg class="chart" ></svg>
+                            </div>
+
+                            {{--@barchart( 'MyStocks', 'bar')--}}
                         </div>
                     </div>
 

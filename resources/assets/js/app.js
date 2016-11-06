@@ -71,4 +71,8 @@ jQuery(document).ready(function ($) {
 		force();
 	}
 
+	if($('#force').length > 0){
+		bar();
+	}
+
 });

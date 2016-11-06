@@ -163,6 +163,7 @@ return [
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 		Collective\Bus\BusServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
+		Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
 	],
 
 	/*

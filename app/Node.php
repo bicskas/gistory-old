@@ -49,4 +49,8 @@ class Node extends Model
 		return $this->belongsToMany('App\Node','edge','node1_id','node2_id');
 	}
 
+	public function attributes(){
+		return $this->belongsToMany('App\Subproject','nodeattributes','node_id','subproject_id')->pivot('degree','weightdegree');
+	}
+
 }

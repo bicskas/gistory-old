@@ -4,8 +4,14 @@
 @import "_footer.scss";
 @import "nodes/_circular.scss";
 @import "nodes/_force.scss";
+@import "nodes/_bar.scss";
 
-body{
-	background-color: $gray-lighter;
+body {
+  background-color: $gray-lighter;
 }
 
+#stocks-chart {
+
+    height: 100% !important;
+    width: 100% !important;
+}
