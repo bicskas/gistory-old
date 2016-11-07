@@ -1,1 +1,1 @@
-[{"name":"Gyenge Eszter","size":5693,"imports":["Lorem J\u00e1nos"]},{"name":"Lorem J\u00e1nos","size":4657,"imports":[]},{"name":"Negyedik B\u00e9la","size":6139,"imports":[]},{"name":"Tesz Jol\u00e1n","size":11263,"imports":[]}]
+[{"name":"Gyenge Eszter","size":6638,"imports":["Lorem J\u00e1nos","Negyedik B\u00e9la"]},{"name":"Lorem J\u00e1nos","size":9003,"imports":[]},{"name":"Negyedik B\u00e9la","size":15617,"imports":[]},{"name":"Tesz Jol\u00e1n","size":11734,"imports":["Gyenge Eszter"]}]

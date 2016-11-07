@@ -67,6 +67,7 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
         'P' => 
         array (
             'Psy\\' => 4,
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Predis\\' => 7,
             'PhpParser\\' => 10,
@@ -78,6 +79,10 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+        ),
+        'K' => 
+        array (
+            'Khill\\Lavacharts\\' => 17,
         ),
         'I' => 
         array (
@@ -218,6 +223,10 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -237,6 +246,10 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'Khill\\Lavacharts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/khill/lavacharts/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -295,10 +308,6 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
     public static $prefixesPsr0 = array (
         'P' => 
         array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
@@ -355,13 +364,17 @@ class ComposerStaticInit33f0096ca6ae63f1fcf0696ba2adb35b
 
     public static $classMap = array (
         'AdminSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'AlterEdge' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_185323_alter_edge.php',
         'BasicTables' => __DIR__ . '/../..' . '/database/migrations/2016_02_08_145000_basic_tables.php',
-        'CreateEdge' => __DIR__ . '/../..' . '/database/migrations/2016_11_19_222506_create_edge.php',
+        'CreateEdge' => __DIR__ . '/../..' . '/database/migrations/2016_11_02_181152_create_edge.php',
         'CreateNode' => __DIR__ . '/../..' . '/database/migrations/2016_08_19_220402_create_node.php',
         'CreateNodeattributes' => __DIR__ . '/../..' . '/database/migrations/2016_11_02_181148_create_nodeattributes.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateProject' => __DIR__ . '/../..' . '/database/migrations/2016_08_19_185708_create_project.php',
+        'CreateProject2team' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_200013_create_project2team.php',
         'CreateSubproject' => __DIR__ . '/../..' . '/database/migrations/2016_11_02_175334_create_subproject.php',
+        'CreateTeam' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_191235_create_team.php',
+        'CreateUser2team' => __DIR__ . '/../..' . '/database/migrations/2016_11_07_195847_create_user2team.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'EntrustSetupTables' => __DIR__ . '/../..' . '/database/migrations/2016_02_08_144547_entrust_setup_tables.php',

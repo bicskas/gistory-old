@@ -14,9 +14,9 @@ class CreateEdge extends Migration
     {
         Schema::create('edge', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('weight');
-            $table->float('erosseg');
-            $table->integer('node1_id',false,true);
+            $table->integer('weight')->default(1);
+	        $table->float('erosseg');
+	        $table->integer('node1_id',false,true);
             $table->integer('node2_id',false,true);
             $table->integer('subproject_id',false,true);
             $table->foreign('node1_id')->references('id')->on('node')->onUpdate('cascade')->onDelete('cascade');
