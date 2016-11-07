@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Project as Model;
 use App\Http\Requests\ModelRequest;
+use App\Team;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller {
@@ -19,10 +20,26 @@ class ProjectController extends Controller {
 
 	public function index() {
 
-		$lista = Project::all();
+		$user = $this->user;
+		$lista = $user->project;
+
+		$shared = [];
+		foreach ($user->teams as $team){
+			foreach ($team->projects as $project){
+				$shared[] = $project;
+			}
+		}
+
+		foreach ($user->ownteam as $team){
+			foreach ($team->projects as $project){
+				$shared[] = $project;
+			}
+		}
+
 
 		return view('project.lista', array(
-			'lista' => $lista
+			'lista' => $lista,
+			'shared' => $shared
 		));
 	}
 
@@ -46,7 +63,7 @@ class ProjectController extends Controller {
 
 		$this->user->project()->save($model);
 
-
+		$model->teams()->sync($request->get('teams', array()));
 
 		return redirect('/project')
 			->with('uzenet', 'Sikeres mentés!');
@@ -54,9 +71,14 @@ class ProjectController extends Controller {
 
 	private function szerkeszt(Model $model, $method) {
 
+		$own = $this->user->ownteam->lists('name', 'id')->all();
+		$member = $this->user->teams->lists('name', 'id')->all();
+		$teams =$own + $member;
+
 		return view( $this->class . '.form', array(
 			'model' => $model,
 			'method' => $method,
+			'teams' => $teams
 		));
 	}
 

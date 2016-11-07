@@ -24,6 +24,9 @@
                 <?php $id = 'szoveg' ?>
                 {!! Form::bsTextarea($id, $model, ['class' => 'form-control ckeditor']) !!}
 
+                <?php $id = 'teams' ?>
+                {!! Form::bsSelect($id, $model, $teams, ['class' => 'form-control bs-select', 'multiple']) !!}
+
                 <hr>
 
                 {!! Form::mentes() !!}

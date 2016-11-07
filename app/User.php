@@ -82,7 +82,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	}
 
 	public function project(){
-		return $this->hasOne('App\Project', 'user_id', 'id');
+		return $this->hasMany('App\Project', 'user_id', 'id');
+	}
+
+	public function ownteam(){
+		return $this->hasMany('App\Team', 'owner_id', 'id');
+	}
+
+	public function teams()
+	{
+		return $this->belongsToMany('App\Team','user2team','user_id','team_id');
 	}
 
 }

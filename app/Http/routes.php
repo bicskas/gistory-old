@@ -5,6 +5,7 @@ Route::model('szoveg', 'App\Szoveg');
 Route::model('project', 'App\Project');
 Route::model('subproject', 'App\Subproject');
 Route::model('node', 'App\Node');
+Route::model('team', 'App\Team');
 
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +50,12 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
 		Route::post('/network/{projectid}/{subprojectid}/edge', 'NetworkController@saveEdge');
 		Route::resource('project', 'ProjectController');
+		Route::resource('team', 'TeamController');
 		Route::resource('/project/{id}/subproject', 'SubprojectController');
 		Route::resource('/network/node', 'NetworkController');
+
+		Route::post('/addteam/{id}','TeamController@addteam')->name('addteam');
+
 //	Route::resource('network', 'NetworkController');
 		Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
 		Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');

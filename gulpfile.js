@@ -19,7 +19,7 @@ if (!util.env.production) {
 
 elixir(function (mix) {
 	mix.sass('app.scss');
-	mix.scripts(['jquery/dist/jquery.min.js', 'bootstrap/dist/js/bootstrap.min.js','typeahead.js/dist/typeahead.bundle.js'], 'public/js/vendor.js', 'public/vendor');
+	mix.scripts(['jquery/dist/jquery.min.js', 'bootstrap/dist/js/bootstrap.min.js','typeahead.js/dist/typeahead.bundle.js','bootstrap-select/dist/js/bootstrap-select.min.js',], 'public/js/vendor.js', 'public/vendor');
 	mix.scripts(['app.js','circular.js','force_graph.js','bar.js'], 'public/js/app.js');
 	mix.version(['css/app.css', 'js/vendor.js', 'js/app.js']);
 	if (!util.env.production) {

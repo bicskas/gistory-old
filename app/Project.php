@@ -49,4 +49,9 @@ class Project extends Model
 	public function subproject(){
 		return $this->hasMany('App\Subproject','project_id','id');
 	}
+
+	public function teams()
+	{
+		return $this->belongsToMany('App\Team','project2team','project_id','team_id');
+	}
 }

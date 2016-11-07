@@ -75,4 +75,10 @@ jQuery(document).ready(function ($) {
 		bar();
 	}
 
+	$('.bs-select').selectpicker({
+		noneSelectedText: '(válasszon)',
+		liveSearch: true,
+		liveSearchPlaceholder: '(keresés)'
+	});
+
 });

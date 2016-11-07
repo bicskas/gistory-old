@@ -75,6 +75,12 @@ jQuery(document).ready(function ($) {
 		bar();
 	}
 
+	$('.bs-select').selectpicker({
+		noneSelectedText: '(válasszon)',
+		liveSearch: true,
+		liveSearchPlaceholder: '(keresés)'
+	});
+
 });
 /**
  * Created by Video on 2016.11.04..

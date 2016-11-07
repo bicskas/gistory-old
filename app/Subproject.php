@@ -49,7 +49,6 @@ class Subproject extends Model
 		return $this->hasMany('App\Edge','subproject_id','id');
 	}
 
-
 	public function createLink($projectid) {
 //		return route('admin.' . $this->className() . '.show', $this);
 		return "/project/".$projectid.'/'.$this->className() . '/' . $this->getRouteKey();

@@ -5,6 +5,7 @@ return array(
 	'szoveg' => 'Szöveg|Szövegek',
 	'project' => 'Projekt|Projektek',
 	'subproject' => 'Alprojekt|Alprojektek',
+	'team' => 'Csoport|Csoprotok',
 
 	'enum' => array(
 		'menu' => array(

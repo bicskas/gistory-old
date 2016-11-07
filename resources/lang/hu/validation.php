@@ -92,5 +92,6 @@ return array(
 		'menu_id' => 'Szülő menü',
 		'file' => 'Fájl',
 		'leiras' => 'Leírás',
+		'teams' => 'Csoportok'
 	),
 );

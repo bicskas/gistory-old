@@ -16,6 +16,10 @@
                         {{ Form::label('nev2', 'Név') }}
                         {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev2','data-projectid' => $projectid]) }}
                     </div>
+                    <div class="form-group col-sm-7">
+                        {{ Form::label('erosseg', 'Erősség') }}
+                        {{ Form::text('weight','1',['required' => 'required','class' => 'form-control','placeholder' => 'Erősség','id'=>'erosseg','data-projectid' => $projectid]) }}
+                    </div>
                   {{--  <div class="form-group col-sm-7">
                         {!! Form::radio('type','0',true,['id' => 'undirect']) !!}
                         {!! Form::label('undirect','Irányítatlan') !!}
@@ -46,7 +50,10 @@
                             <a href="#download" aria-controls="download" role="tab" data-toggle="tab">Letöltés</a>
                         </li>
                         <li role="presentation">
-                            <a href="#svg-kep" aria-controls="download" role="tab" data-toggle="tab">SVG</a>
+                            <a href="#svg-kep" aria-controls="download" role="tab" data-toggle="tab">Chord</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#force-graph" aria-controls="download" role="tab" data-toggle="tab">Force</a>
                         </li>
                         <li role="presentation">
                             <a href="#statisztika" aria-controls="download" role="tab"
@@ -74,8 +81,9 @@
 
                         <div role="tabpanel" class="tab-pane" id="svg-kep">
                             <div id="svg" data-json="/{{$file}}"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="force-graph">
                             <div id="force" data-json="/{{$forcefile}}">
-                                {{--<svg width="960" height="600"></svg>--}}
                                 <svg width="1140" height="800"></svg>
                             </div>
                         </div>
