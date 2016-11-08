@@ -84,12 +84,12 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="force-graph">
                             <div id="force" data-json="/{{$forcefile}}">
-                                <svg width="1140" height="800"></svg>
+                                <svg width="900" height="600"></svg>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="statisztika">
                             <div id="bar" data-nevek="{{$nevek}}" data-degree="{!! $degree !!}">
-                                <svg class="chart" ></svg>
+                                <svg class="chart" width="1000" height="800"></svg>
                             </div>
 
                             {{--@barchart( 'MyStocks', 'bar')--}}

@@ -62,7 +62,7 @@ jQuery(document).ready(function ($) {
 	 */
 
 	//----------------------------ábrák megjelenítése---------------
-
+	
 	if($('#svg').length > 0){
 		circular();
 	}
@@ -267,6 +267,7 @@ function force() {
 		.force("charge", d3.forceManyBody())
 		.force("center", d3.forceCenter(width / 2, height / 2));
 
+	// d3.json("/json/miserables.json", function(error, graph) {
 	d3.json($('#force').data('json'), function (error, graph) {
 		if (error) throw error;
 
@@ -284,7 +285,7 @@ function force() {
 			.selectAll("circle")
 			.data(graph.nodes)
 			.enter().append("circle")
-			.attr("r", 6)
+			.attr("r", 5)
 			.attr("fill", function (d) {
 				return color(d.group);
 			})
@@ -331,7 +332,7 @@ function force() {
 	});
 
 	function dragstarted(d) {
-		if (!d3.event.active) simulation.alphaTarget(0.1).restart();
+		if (!d3.event.active) simulation.alphaTarget(0.3).restart();
 		d.fx = d.x;
 		d.fy = d.y;
 	}
