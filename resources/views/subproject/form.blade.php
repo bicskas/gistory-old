@@ -6,7 +6,7 @@
             <div class="panel-heading clearfix">
                 <h3 class="panel-title pull-left">{{trans_choice('admin.' . $aktiv_oldal, 1)}} szerkesztése</h3>
                 <div class="pull-right">
-                    <a href="/{{$aktiv_oldal}}" class="btn-info btn btn-xs">
+                    <a href="/project/{!! $projectid !!}/subproject" class="btn-info btn btn-xs">
                         <span class="glyphicon glyphicon-arrow-left"></span> Vissza
                     </a>
                 </div>

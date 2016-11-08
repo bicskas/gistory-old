@@ -24,7 +24,6 @@ class NetworkController extends Controller
 
 	public function index($projectid)
 	{
-
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
 
 		return view('network.nodes', array(
@@ -58,7 +57,7 @@ class NetworkController extends Controller
 			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
 			$nevek[] = $n->nev;
-			$degree[] = count($subproject->edge()->where('node1_id', $n->id)->orWhere('node2_id', $n->id)->get());
+			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
 
 		}
 
@@ -100,6 +99,8 @@ class NetworkController extends Controller
 		$edge->node1_id = Project::find($projectid)->node()->whereNev($request->get('nev1'))->first()->id;
 		$edge->node2_id = Project::find($projectid)->node()->whereNev($request->get('nev2'))->first()->id;
 		$subproject->edge()->save($edge);
+
+		set_degree($subproject);
 
 		return redirect('/network/' . $projectid . '/' . $subprojectid)
 			->with('uzenet', 'Sikeres mentette a kapcsolatot!');
@@ -320,6 +321,16 @@ class NetworkController extends Controller
 		return array(
 			'id' => $model->id,
 		);
+	}
+
+	public function deleteEdge($edgeid)
+	{
+		$edge = Edge::find($edgeid);
+		$subproject = $edge->subproject;
+		$edge->delete();
+		set_degree($subproject);
+
+		return redirect('/network/'.$subproject->project->id.'/'.$subproject->id)->with('figyelmeztet','Kapcsolat törölve');
 	}
 
 }

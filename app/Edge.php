@@ -18,4 +18,9 @@ class Edge extends Model
 	{
 		return $this->belongsTo('App\Node', 'node2_id', 'id');
 	}
+
+	public function subproject()
+	{
+		return $this->belongsTo('App\Subproject', 'subproject_id', 'id');
+	}
 }

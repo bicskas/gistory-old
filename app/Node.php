@@ -49,8 +49,13 @@ class Node extends Model
 		return $this->belongsToMany('App\Node','edge','node1_id','node2_id');
 	}
 
-	public function attributes(){
-		return $this->belongsToMany('App\Subproject','nodeattributes','node_id','subproject_id')->pivot('degree','weightdegree');
+	public function subproject()
+	{
+		return $this->belongsToMany('App\Subproject','nodeattribute','node_id','subproject_id')->withPivot('degree','weightdegree','clustering');
 	}
+
+	/*public function scopeAttribute($query,$subproject){
+		return $query->
+	}*/
 
 }

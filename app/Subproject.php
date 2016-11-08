@@ -49,6 +49,11 @@ class Subproject extends Model
 		return $this->hasMany('App\Edge','subproject_id','id');
 	}
 
+	public function node()
+	{
+		return $this->belongsToMany('App\Node','nodeattribute','subproject_id','node_id')->withPivot('degree','weightdegree','clustering');
+	}
+
 	public function createLink($projectid) {
 //		return route('admin.' . $this->className() . '.show', $this);
 		return "/project/".$projectid.'/'.$this->className() . '/' . $this->getRouteKey();

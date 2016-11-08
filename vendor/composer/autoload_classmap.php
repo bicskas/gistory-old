@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'AdminSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'AlterEdge' => $baseDir . '/database/migrations/2016_11_07_185323_alter_edge.php',
+    'AlterNodeattributes' => $baseDir . '/database/migrations/2016_11_08_211542_alter_nodeattributes.php',
+    'AlterSubproject' => $baseDir . '/database/migrations/2016_11_08_211723_alter_subproject.php',
     'BasicTables' => $baseDir . '/database/migrations/2016_02_08_145000_basic_tables.php',
     'CreateEdge' => $baseDir . '/database/migrations/2016_11_02_181152_create_edge.php',
     'CreateNode' => $baseDir . '/database/migrations/2016_08_19_220402_create_node.php',

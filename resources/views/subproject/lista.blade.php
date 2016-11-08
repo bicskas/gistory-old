@@ -26,6 +26,9 @@
                                         {!! $l->leiras !!}
                                     </div>
                                     <div class="panel-footer">
+                                        <a class="btn btn-default btn-xs text-right" href="/project/{!! $projectid !!}/subproject/{!! $l->id !!}/edit">
+                                            <span class="glyphicon glyphicon-pencil"></span> Szerkesztés
+                                        </a>
                                         <a class="btn btn-primary btn-xs text-right" href="/network/{!! $l->project->id !!}/{!! $l->id !!}">
                                             <span class="glyphicon glyphicon-plus"></span> Kapcsolatok
                                         </a>

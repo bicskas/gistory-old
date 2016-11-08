@@ -1,11 +1,10 @@
 <?php
 
-if ( ! function_exists('e'))
-{
+if (!function_exists('e')) {
 	/**
 	 * Escape HTML entities in a string.
 	 *
-	 * @param  string  $value
+	 * @param  string $value
 	 * @return string
 	 */
 	function e($value)
@@ -14,21 +13,22 @@ if ( ! function_exists('e'))
 	}
 }
 
-if ( ! function_exists('inline_svg'))
-{
+if (!function_exists('inline_svg')) {
 	/**
 	 * inline svg beszúrása
 	 * @param string $path file path
 	 * @return string file tartalom
 	 */
-	function inline_svg($path){
-		return file_exists($path) ? preg_replace('/<\?xml.+\?>/','',file_get_contents($path, true)) : false;
+	function inline_svg($path)
+	{
+		return file_exists($path) ? preg_replace('/<\?xml.+\?>/', '', file_get_contents($path, true)) : false;
 	}
 }
 
-if ( ! function_exists('url_get_contents')) {
+if (!function_exists('url_get_contents')) {
 
-	function url_get_contents($url, $post = null, $json_post = true) {
+	function url_get_contents($url, $post = null, $json_post = true)
+	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -38,7 +38,7 @@ if ( ! function_exists('url_get_contents')) {
 			curl_setopt($ch, CURLOPT_POST, 1);
 			if ($json_post) {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-			}else{
+			} else {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 			}
 		}
@@ -48,22 +48,37 @@ if ( ! function_exists('url_get_contents')) {
 	}
 }
 
-if ( ! function_exists('labels')) {
-	function labels($mezo) {
+if (!function_exists('labels')) {
+	function labels($mezo)
+	{
 		return trans('validation.attributes.' . $mezo);
 	}
 }
 
-function __($key) {
+function __($key)
+{
 	if (Lang::has('messages.' . $key)) {
 		return trans('messages.' . $key);
 	}
 	return $key;
 }
 
-function human_filesize($bytes, $decimals = 2) {
+function human_filesize($bytes, $decimals = 2)
+{
 	$sz = ' KMGTP';
 	$factor = floor((strlen($bytes) - 1) / 3);
-	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @trim($sz[$factor]). "B";
+	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @trim($sz[$factor]) . "B";
+}
+
+function set_degree($subproject)
+{
+	foreach ($subproject->node as $node) {
+		$attribute = $node->subproject()->where('subproject_id', $subproject->id)->first()->pivot;
+		$attribute->degree = $subproject->edge()->where(function ($q) use ($node) {
+			$q->where('node1_id', $node->id)->orWhere('node2_id', $node->id);
+		})->count();
+		$attribute->save();
+	}
+
 }
 

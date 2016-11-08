@@ -39,6 +39,9 @@ class SubprojectController extends Controller
 
 		$model->fill($data)->project()->associate($projectid)->save();
 
+		$model->node()->sync($model->project->node);
+
+		set_degree($model);
 
 		return redirect()->back()
 			->with('uzenet', 'Sikeres mentés!');
@@ -61,17 +64,17 @@ class SubprojectController extends Controller
 		));
 	}
 
-	public function store(ModelRequest $request, Model $model,$projectid)
+	public function store($projectid,ModelRequest $request, Model $model)
 	{
 		return $this->save($request, $model,$projectid);
 	}
 
-	public function update(ModelRequest $request, Model $model,$projectid)
+	public function update($projectid,ModelRequest $request, Model $model)
 	{
 		return $this->save($request, $model,$projectid);
 	}
 
-	public function edit(Request $request, Model $model,$projectid)
+	public function edit($projectid,Request $request, Model $model)
 	{
 		return $this->szerkeszt($model, 'put',$projectid);
 	}
@@ -81,7 +84,7 @@ class SubprojectController extends Controller
 		return $this->szerkeszt($model, 'post',$projectid);
 	}
 
-	public function destroy(Model $model)
+	public function destroy($projectid,Model $model)
 	{
 		$model->delete();
 		return array(
