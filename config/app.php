@@ -162,8 +162,7 @@ return [
 		Intervention\Image\ImageServiceProvider::class,
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 		Collective\Bus\BusServiceProvider::class,
-		Maatwebsite\Excel\ExcelServiceProvider::class,
-		Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
+		Maatwebsite\Excel\ExcelServiceProvider::class
 	],
 
 	/*

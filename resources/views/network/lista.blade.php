@@ -83,9 +83,6 @@
                             <div id="svg" data-json="/{{$file}}"></div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="force-graph">
-                            <div id="force" data-json="/{{$forcefile}}">
-                                <svg width="900" height="600"></svg>
-                            </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="statisztika">
                             <div id="bar" data-nevek="{{$nevek}}" data-degree="{!! $degree !!}">
