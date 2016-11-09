@@ -71,7 +71,7 @@ jQuery(document).ready(function ($) {
 		force();
 	}
 
-	if($('#force').length > 0){
+	if($('#bar').length > 0){
 		bar();
 	}
 
@@ -408,7 +408,7 @@ function bar() {
 		.orient("left");
 
 // Specify the chart area and dimensions
-	var chart = d3.select(".chart")
+	var chart = d3.select("#bar > .chart")
 		.attr("width", spaceForLabels + chartWidth + spaceForLegend)
 		.attr("height", chartHeight);
 
