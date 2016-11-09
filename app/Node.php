@@ -46,7 +46,7 @@ class Node extends Model
 
 	public function edge()
 	{
-		return $this->belongsToMany('App\Node','edge','node1_id','node2_id');
+		return $this->belongsToMany('App\Node','edge','node1_id','node2_id')->withPivot('weight','erosseg','type');
 	}
 
 	public function subproject()

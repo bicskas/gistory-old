@@ -5,15 +5,16 @@
 
 function bar() {
 
+	var elsosor= [''];
 
 	var data = {
 		labels:
-			$('#bar').data('nevek')
+			elsosor.concat($('#bar').data('nevek'))
 		,
 		series: [
 			{
-				label: '2012',
-				values: $('#bar').data('degree')
+				label: 'Fokszám',
+				values: elsosor.concat($('#bar').data('degree'))
 			},
 			/*{
 				label: '2013',

@@ -64,16 +64,16 @@ jQuery(document).ready(function ($) {
 	//----------------------------ábrák megjelenítése---------------
 
 	if($('#svg').length > 0){
-		circular();
+		circular('#svg');
 	}
 
 	if($('#force').length > 0){
-		force();
+		force('#force');
 	}
 
-	/*if($('#bar').length > 0){
+	if($('#bar').length > 0){
 		bar();
-	}*/
+	}
 
 	$('.bs-select').selectpicker({
 		noneSelectedText: '(válasszon)',

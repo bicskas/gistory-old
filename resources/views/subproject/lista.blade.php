@@ -26,13 +26,16 @@
                                         {!! $l->leiras !!}
                                     </div>
                                     <div class="panel-footer">
-                                        <a class="btn btn-default btn-xs text-right" href="/project/{!! $projectid !!}/subproject/{!! $l->id !!}/edit">
+                                        <a class="btn btn-default btn-xs text-right"
+                                           href="/project/{!! $projectid !!}/subproject/{!! $l->id !!}/edit">
                                             <span class="glyphicon glyphicon-pencil"></span> Szerkesztés
                                         </a>
-                                        <a class="btn btn-primary btn-xs text-right" href="/network/{!! $l->project->id !!}/{!! $l->id !!}">
+                                        <a class="btn btn-primary btn-xs text-right"
+                                           href="/network/{!! $l->project->id !!}/{!! $l->id !!}">
                                             <span class="glyphicon glyphicon-plus"></span> Kapcsolatok
                                         </a>
-                                        <a class="btn btn-danger btn-xs torol" title="Töröl" href="{{$l->createLink($projectid)}}">
+                                        <a class="btn btn-danger btn-xs torol" title="Töröl"
+                                           href="{{$l->createLink($projectid)}}">
                                             <span class="glyphicon glyphicon-trash"></span> Töröl
                                         </a>
                                     </div>
@@ -40,6 +43,23 @@
                             </div>
 
                         @endforeach
+
+                        @if(count($lista) > 1)
+                            <div class="col-sm-6" id="item_osszes">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Összehasoníltás</div>
+                                    <div class="panel-body">
+                                        {!! $l->leiras !!}
+                                    </div>
+                                    <div class="panel-footer">
+                                        <a class="btn btn-primary btn-xs text-right"
+                                           href="/network/compare/{{$projectid}}">
+                                            <span class="glyphicon glyphicon-plus"></span> Öszehasonlítás
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="panel-footer">
