@@ -62,7 +62,7 @@ jQuery(document).ready(function ($) {
 	 */
 
 	//----------------------------ábrák megjelenítése---------------
-	
+
 	if($('#svg').length > 0){
 		circular();
 	}
