@@ -25,13 +25,13 @@ class ProjectController extends Controller {
 
 		$shared = [];
 		foreach ($user->teams as $team){
-			foreach ($team->projects as $project){
+			foreach ($team->projects()->where('user_id','!=',$user->id)->get() as $project){
 				$shared[] = $project;
 			}
 		}
 
 		foreach ($user->ownteam as $team){
-			foreach ($team->projects as $project){
+			foreach ($team->projects()->where('user_id','!=',$user->id)->get() as $project){
 				$shared[] = $project;
 			}
 		}

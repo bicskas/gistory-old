@@ -3,9 +3,8 @@
  */
 
 
-function force() {
-
-	var svg = d3.select("#force > svg"),
+function force(param) {
+	var svg = d3.select(param + " > svg"),
 		width = +svg.attr("width"),
 		height = +svg.attr("height");
 
@@ -22,7 +21,7 @@ function force() {
 		.force("center", d3.forceCenter(width / 2, height / 2));
 
 	// d3.json("/json/miserables.json", function(error, graph) {
-	d3.json($('#force').data('json'), function (error, graph) {
+	d3.json($(param).data('json'), function (error, graph) {
 		if (error) throw error;
 
 		var link = svg.append("g")

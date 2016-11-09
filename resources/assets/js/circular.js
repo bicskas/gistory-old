@@ -2,7 +2,7 @@
  * Created by Video on 2016.11.04..
  */
 
-function circular() {
+function circular(param) {
 
 
 
@@ -29,7 +29,7 @@ function circular() {
 			return d.x / 180 * Math.PI;
 		});
 
-	var svg = d3.select("#svg").append("svg")
+	var svg = d3.select(param).append("svg")
 		.attr("width", diameter)
 		.attr("height", diameter)
 		.append("g")
@@ -39,7 +39,7 @@ function circular() {
 		node = svg.append("g").selectAll(".node");
 
 	// d3.json("/json/readme-flare-imports2.json", function (error, classes) {
-	d3.json($('#svg').data('json'), function (error, classes) {
+	d3.json($(param).data('json'), function (error, classes) {
 		if (error) throw error;
 
 		var nodes = cluster.nodes(packageHierarchy(classes)),

@@ -9,6 +9,12 @@ class Edge extends Model
 	protected $table = 'edge';
 	public $timestamps = false;
 
+	protected $fillable = array(
+		'weight',
+		'erosseg',
+		'type',
+	);
+
 	public function node1()
 	{
 		return $this->belongsTo('App\Node', 'node1_id', 'id');

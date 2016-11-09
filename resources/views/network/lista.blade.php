@@ -3,35 +3,40 @@
 @section('content')
     <section id="network">
         <div class="container">
+            <div class="well">
+                <h4>Alproject: {!! $subproject->nev !!}</h4>
+                <div class="pull-right"><a href="/project/{!! $projectid !!}/subproject" class="btn-info btn btn-xs">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Vissza az alprojektekhez
+                    </a></div>
+            </div>
             <article id="edges-form">
-                <div class="row">
-                    <h5>Új él hozzáadása</h5>
-                    {!! Form::open(['class' => 'form-horizontal','url' => "/network/$projectid/$subproject->id/edge"]) !!}
-                    <div class="form-group col-sm-7">
-                        {{ Form::label('nev1', 'Név') }}
-                        {{ Form::text('nev1','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev1','data-projectid' => $projectid]) }}
-                    </div>
-
-                    <div class="form-group col-sm-7">
-                        {{ Form::label('nev2', 'Név') }}
-                        {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev2','data-projectid' => $projectid]) }}
-                    </div>
-                    <div class="form-group col-sm-7">
-                        {{ Form::label('erosseg', 'Erősség') }}
-                        {{ Form::text('weight','1',['required' => 'required','class' => 'form-control','placeholder' => 'Erősség','id'=>'erosseg','data-projectid' => $projectid]) }}
-                    </div>
-                  {{--  <div class="form-group col-sm-7">
-                        {!! Form::radio('type','0',true,['id' => 'undirect']) !!}
-                        {!! Form::label('undirect','Irányítatlan') !!}
-
-                        {!! Form::radio('type','1',false,['id' => 'direct']) !!}
-                        {!! Form::label('direct','Irányított') !!}
-                    </div>--}}
-                    <div class="form-group col-sm-7">
-                        {!! Form::submit('Él hozzáadása',['class' => 'btn btn-primary']) !!}
-                    </div>
-                    {!! Form::close() !!}
+                <h5>Új él hozzáadása</h5>
+                {!! Form::open(['class' => 'form-horizontal','url' => "/network/$projectid/$subproject->id/edge"]) !!}
+                <div class="form-group col-sm-7">
+                    {{ Form::label('nev1', 'Név') }}
+                    {{ Form::text('nev1','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev1','data-projectid' => $projectid]) }}
                 </div>
+
+                <div class="form-group col-sm-7">
+                    {{ Form::label('nev2', 'Név') }}
+                    {{ Form::text('nev2','',['required' => 'required','class' => 'form-control','placeholder' => 'Név','id'=>'nev2','data-projectid' => $projectid]) }}
+                </div>
+                <div class="form-group col-sm-7">
+                    {{ Form::label('erosseg', 'Erősség') }}
+                    {{ Form::text('weight','1',['required' => 'required','class' => 'form-control','placeholder' => 'Erősség','id'=>'erosseg','data-projectid' => $projectid]) }}
+                </div>
+                {{--  <div class="form-group col-sm-7">
+                      {!! Form::radio('type','0',true,['id' => 'undirect']) !!}
+                      {!! Form::label('undirect','Irányítatlan') !!}
+
+                      {!! Form::radio('type','1',false,['id' => 'direct']) !!}
+                      {!! Form::label('direct','Irányított') !!}
+                  </div>--}}
+                <div class="form-group col-sm-7">
+                    {!! Form::submit('Él hozzáadása',['class' => 'btn btn-primary']) !!}
+                </div>
+                {!! Form::close() !!}
+                <div class="clearfix"></div>
             </article>
 
 
@@ -53,11 +58,11 @@
                             <a href="#svg-kep" aria-controls="download" role="tab" data-toggle="tab">Chord</a>
                         </li>
                         <li role="presentation">
-                            <a href="#force-graph" aria-controls="download" role="tab" data-toggle="tab">Force</a>
+                            <a href="#force-graph" aria-controls="download" role="tab" data-toggle="tab">Gráf</a>
                         </li>
                         <li role="presentation">
                             <a href="#statisztika" aria-controls="download" role="tab"
-                               data-toggle="tab">Statisztikák</a>
+                               data-toggle="tab">Fokszámeloszlás</a>
                         </li>
                     </ul>
 
@@ -83,7 +88,7 @@
                             <div id="svg" data-json="/{{$file}}"></div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="force-graph">
-                            <div id="force"  data-json="/{!! $forcefile !!}">
+                            <div id="force" data-json="/{!! $forcefile !!}">
                                 <svg width="1000" height="800"></svg>
                             </div>
                         </div>
@@ -91,8 +96,6 @@
                             <div id="bar" data-nevek="{{$nevek}}" data-degree="{!! $degree !!}">
                                 <svg class="chart" width="1000" height="800"></svg>
                             </div>
-
-                            {{--@barchart( 'MyStocks', 'bar')--}}
                         </div>
                     </div>
 

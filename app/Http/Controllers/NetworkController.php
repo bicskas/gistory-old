@@ -39,22 +39,18 @@ class NetworkController extends Controller
 		$subproject = Subproject::find($subprojectid);
 
 		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
-		$json = [];
+		$chord = [];
 		$force = ['nodes' => [], 'links' => []];
 
 		foreach ($nodes as $n) {
 			$targets = [];
 			$force['nodes'][] = ['id' => $n->nev, 'group' => 1];
 
-
-
 			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
 				$targets[] = $e->nev;
-//				$force['links'][] = ['source' => str_slug($e->node1->nev), 'target' => str_slug($e->node2->nev), 'value' => 1];
-
 			}
 
-			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+			$chord[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
 			$nevek[] = $n->nev;
 			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
@@ -64,25 +60,124 @@ class NetworkController extends Controller
 			$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => 1];
 		}
 
-//		dd(count($force['nodes']),count($force['links']));
+		$file = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . ".json";
+		File::put($file, json_encode($chord));
 
-		$file = "json/" . $projectid . '_' . \Auth::user()->id . ".json";
-		File::put($file, json_encode($json));
-
-		$forcefile = "json/" . $projectid . '_' . \Auth::user()->id . "force.json";
+		$forcefile = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . "force.json";
 		File::put($forcefile, json_encode($force));
 
 		return view('network.lista', array(
 			'nodes' => $nodes,
 			'projectid' => $projectid,
 			'subproject' => $subproject,
-			'json' => json_encode($json),
+			'chord' => json_encode($chord),
 			'force' => json_encode($force),
 			'file' => $file,
 			'forcefile' => $forcefile,
 			'nevek' => json_encode($nevek),
 			'degree' => json_encode($degree),
 		));
+	}
+
+	public function compare($projectid)
+	{
+
+		$project = Project::find($projectid);
+
+		$marvolt = [];
+		$same = [];
+		$diff = [];
+		$results = [];
+		$chord_same = [];
+		$chord_diff = [];
+		$force_same = ['nodes' => [], 'links' => []];
+		$force_diff = ['nodes' => [], 'links' => []];
+		$edges = Edge::whereIn('subproject_id', $project->subproject->lists('id')->toArray())->get();
+
+		foreach ($edges as $edge) {
+			$result = Edge::where(function ($query) use ($edge) {
+				$query->where('node1_id', $edge->node1_id)->orWhere('node2_id', $edge->node1_id);
+			})->where(function ($query) use ($edge) {
+				$query->where('node1_id', $edge->node2_id)->orWhere('node2_id', $edge->node2_id);
+			})->whereNotIn('id', $marvolt)->get();
+			foreach ($result as $e) {
+				$marvolt[] = $e->id;
+			}
+			$results[] = $result;
+		}
+
+		foreach ($results as $r) {
+			if (!$r->isEmpty()) {
+				if (count($r) == $project->subproject->count()) {
+					$same[$r->first()->node1_id][] = $r;
+				} else {
+					$diff[$r->first()->node1_id][] = $r;
+				}
+			}
+		}
+
+		foreach ($project->node as $n) {
+			$targets_same = [];
+			$targets_diff = [];
+			$force_same['nodes'][] = ['id' => str_slug($n->nev), 'group' => 1];
+			$force_diff['nodes'][] = ['id' => str_slug($n->nev), 'group' => 1];
+
+			if (array_key_exists($n->id, $same)) {
+				foreach ($same[$n->id] as $e) {
+					$targets_same[] = $e->first()->node2->nev;
+				}
+			}
+			$chord_same[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets_same];
+
+			if (array_key_exists($n->id, $diff)) {
+				foreach ($diff[$n->id] as $e) {
+					$targets_diff[] = $e->first()->node2->nev;
+				}
+			}
+			$chord_diff[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets_diff];
+
+			$nevek[] = $n->nev;
+//			$degree[] = $n->subproject()->where('subproject_id', $project->id)->first()->pivot->degree;
+
+		}
+		foreach ($same as $edges) {
+			foreach ($edges as $e) {
+				$force_same['links'][] = ['source' => str_slug($e->first()->node1->nev), 'target' => str_slug($e->first()->node2->nev), 'value' => ($e->first()->weight * 10)];
+			}
+		}
+
+		foreach ($diff as $edges) {
+			foreach ($edges as $e) {
+				$force_diff['links'][] = ['source' => str_slug($e->first()->node1->nev), 'target' => str_slug($e->first()->node2->nev), 'value' => ($e->first()->weight * 10)];
+			}
+		}
+
+		$file_same = "json/" . $projectid . '_same_' . \Auth::user()->id . ".json";
+		File::put($file_same, json_encode($chord_same));
+
+		$forcefile_same = "json/" . $projectid . '_same_' . \Auth::user()->id . "force.json";
+		File::put($forcefile_same, json_encode($force_same));
+
+		$file_diff = "json/" . $projectid . '_diff_' . \Auth::user()->id . ".json";
+		File::put($file_diff, json_encode($chord_diff));
+
+		$forcefile_diff = "json/" . $projectid . '_diff_' . \Auth::user()->id . "force.json";
+		File::put($forcefile_diff, json_encode($force_diff));
+
+		return view('network.compare', array(
+			'project' => $project,
+			'projectid' => $projectid,
+			'chord_same' => json_encode($chord_same),
+			'force_same' => json_encode($force_same),
+			'file_same' => $file_same,
+			'forcefile_same' => $forcefile_same,
+			'nevek' => json_encode($nevek),
+			'chord_diff' => json_encode($chord_diff),
+			'force_diff' => json_encode($force_diff),
+			'file_diff' => $file_diff,
+			'forcefile_diff' => $forcefile_diff,
+		));
+
 	}
 
 	public function createNode(ModelRequest $request, Model $model, $projectid)
@@ -103,8 +198,8 @@ class NetworkController extends Controller
 		$edge = new Edge();
 		$edge->node1_id = Project::find($projectid)->node()->whereNev($request->get('nev1'))->first()->id;
 		$edge->node2_id = Project::find($projectid)->node()->whereNev($request->get('nev2'))->first()->id;
+		$edge->weight = $request->get('weight');
 		$subproject->edge()->save($edge);
-
 		set_degree($subproject);
 
 		return redirect('/network/' . $projectid . '/' . $subprojectid)
@@ -335,7 +430,7 @@ class NetworkController extends Controller
 		$edge->delete();
 		set_degree($subproject);
 
-		return redirect('/network/'.$subproject->project->id.'/'.$subproject->id)->with('figyelmeztet','Kapcsolat törölve');
+		return redirect('/network/' . $subproject->project->id . '/' . $subproject->id)->with('figyelmeztet', 'Kapcsolat törölve');
 	}
 
 }
