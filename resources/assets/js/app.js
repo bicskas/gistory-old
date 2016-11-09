@@ -71,9 +71,9 @@ jQuery(document).ready(function ($) {
 		force();
 	}
 
-	if($('#bar').length > 0){
+	/*if($('#bar').length > 0){
 		bar();
-	}
+	}*/
 
 	$('.bs-select').selectpicker({
 		noneSelectedText: '(válasszon)',

@@ -44,14 +44,14 @@ class NetworkController extends Controller
 
 		foreach ($nodes as $n) {
 			$targets = [];
-			$force['nodes'][] = ['id' => $n->nev, 'group' => 1];
+			$force['nodes'][] = ['id' => str_slug($n->nev), 'group' => 1];
 
-			foreach ($subproject->edge as $e) {
-				$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => 1];
-			}
+
 
 			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
 				$targets[] = $e->nev;
+//				$force['links'][] = ['source' => str_slug($e->node1->nev), 'target' => str_slug($e->node2->nev), 'value' => 1];
+
 			}
 
 			$json[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
@@ -60,6 +60,11 @@ class NetworkController extends Controller
 			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
 
 		}
+		foreach ($subproject->edge as $e) {
+			$force['links'][] = ['source' => str_slug($e->node1->nev), 'target' => str_slug($e->node2->nev), 'value' => 1];
+		}
+
+//		dd(count($force['nodes']),count($force['links']));
 
 		$file = "json/" . $projectid . '_' . \Auth::user()->id . ".json";
 		File::put($file, json_encode($json));
