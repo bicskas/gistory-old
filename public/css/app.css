@@ -5771,46 +5771,46 @@ footer {
       footer > .container a:hover {
         color: #005b96; }
 
-#svg {
+.circular {
   display: block; }
-  #svg .node {
+  .circular .node {
     font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
     fill: #777; }
-  #svg .node:hover {
+  .circular .node:hover {
     fill: #000;
     font-size: 13px; }
-  #svg .link {
+  .circular .link {
     stroke: steelblue;
     stroke-opacity: .4;
     fill: none;
     pointer-events: none; }
-  #svg .node:hover,
-  #svg .node--source,
-  #svg .node--target {
+  .circular .node:hover,
+  .circular .node--source,
+  .circular .node--target {
     font-weight: 700; }
-  #svg .node--source {
+  .circular .node--source {
     fill: #2ca02c;
     font-size: 12px;
     font-weight: bold; }
-  #svg .node--target {
+  .circular .node--target {
     fill: #d62728;
     font-size: 12px;
     font-weight: bold; }
-  #svg .link--source,
-  #svg .link--target {
+  .circular .link--source,
+  .circular .link--target {
     stroke-opacity: 1;
     stroke-width: 2px; }
-  #svg .link--source {
+  .circular .link--source {
     stroke: #d62728; }
-  #svg .link--target {
+  .circular .link--target {
     stroke: #2ca02c; }
 
-#force {
+.force {
   display: block; }
-  #force .links line {
-    stroke: #999;
+  .force .links line {
+    stroke: red;
     stroke-opacity: 0.6; }
-  #force .nodes circle {
+  .force .nodes circle {
     stroke: #fff;
     stroke-width: 1.5px; }
 

@@ -85,10 +85,10 @@
                         </div>
 
                         <div role="tabpanel" class="tab-pane" id="svg-kep">
-                            <div id="svg" data-json="/{{$file}}"></div>
+                            <div id="svg" class="circular" data-json="/{{$file}}"></div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="force-graph">
-                            <div id="force" data-json="/{!! $forcefile !!}">
+                            <div id="force" class="force" data-json="/{!! $forcefile !!}">
                                 <svg width="1000" height="800"></svg>
                             </div>
                         </div>
