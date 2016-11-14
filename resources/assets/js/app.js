@@ -67,8 +67,24 @@ jQuery(document).ready(function ($) {
 		circular('#svg');
 	}
 
+	if($('#svg_same').length > 0){
+		circular('#svg_same');
+	}
+
+	if($('#svg_diff').length > 0){
+		circular('#svg_diff');
+	}
+
 	if($('#force').length > 0){
 		force('#force');
+	}
+
+	if($('#force_same').length > 0){
+		force('#force_same');
+	}
+
+	if($('#force_diff').length > 0){
+		force('#force_diff');
 	}
 
 	if($('#bar').length > 0){

@@ -116,11 +116,11 @@ class NetworkController extends Controller
 			}
 		}
 
-		foreach ($project->node as $n) {
+		foreach ($project->node()->orderBy('nev')->get() as $n) {
 			$targets_same = [];
 			$targets_diff = [];
-			$force_same['nodes'][] = ['id' => str_slug($n->nev), 'group' => 1];
-			$force_diff['nodes'][] = ['id' => str_slug($n->nev), 'group' => 1];
+			$force_same['nodes'][] = ['id' => $n->nev, 'group' => 1];
+			$force_diff['nodes'][] = ['id' => $n->nev, 'group' => 1];
 
 			if (array_key_exists($n->id, $same)) {
 				foreach ($same[$n->id] as $e) {
@@ -142,13 +142,13 @@ class NetworkController extends Controller
 		}
 		foreach ($same as $edges) {
 			foreach ($edges as $e) {
-				$force_same['links'][] = ['source' => str_slug($e->first()->node1->nev), 'target' => str_slug($e->first()->node2->nev), 'value' => ($e->first()->weight * 10)];
+				$force_same['links'][] = ['source' => $e->first()->node1->nev, 'target' => $e->first()->node2->nev, 'value' => ($e->first()->weight * 1)];
 			}
 		}
 
 		foreach ($diff as $edges) {
 			foreach ($edges as $e) {
-				$force_diff['links'][] = ['source' => str_slug($e->first()->node1->nev), 'target' => str_slug($e->first()->node2->nev), 'value' => ($e->first()->weight * 10)];
+				$force_diff['links'][] = ['source' => $e->first()->node1->nev, 'target' => $e->first()->node2->nev, 'value' => ($e->first()->weight * 1)];
 			}
 		}
 
