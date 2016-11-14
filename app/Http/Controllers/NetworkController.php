@@ -185,6 +185,10 @@ class NetworkController extends Controller
 
 		$data = $request->all();
 		$model->fill($data)->project()->associate($projectid)->save();
+		$project = Project::find($projectid);
+		foreach ($project->subproject as $sub){
+			$sub->node()->sync($project->node);
+		}
 
 //		$model->project()->associate($projectid)->save();
 

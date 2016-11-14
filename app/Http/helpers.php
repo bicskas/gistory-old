@@ -73,12 +73,17 @@ function human_filesize($bytes, $decimals = 2)
 function set_degree($subproject)
 {
 	foreach ($subproject->node as $node) {
-		$attribute = $node->subproject()->where('subproject_id', $subproject->id)->first()->pivot;
-		$attribute->degree = $subproject->edge()->where(function ($q) use ($node) {
+		$nodeattribute = $node->subproject()->where('subproject_id', $subproject->id)->first()->pivot;
+		$edges = $subproject->edge()->where(function ($q) use ($node) {
 			$q->where('node1_id', $node->id)->orWhere('node2_id', $node->id);
-		})->count();
-		$attribute->save();
-	}
+		})->get();
+		$nodeattribute->degree = count($edges);
+		$nodeattribute->weightdegree = 0;
 
+		foreach ($edges as $edge) {
+			$nodeattribute->weightdegree += $edge->weight;
+		}
+		$nodeattribute->save();
+	}
 }
 

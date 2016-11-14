@@ -64,15 +64,15 @@ jQuery(document).ready(function ($) {
 	//----------------------------ábrák megjelenítése---------------
 
 	if($('#svg').length > 0){
-		circular('#svg');
+		chord('#svg');
 	}
 
 	if($('#svg_same').length > 0){
-		circular('#svg_same');
+		chord('#svg_same');
 	}
 
 	if($('#svg_diff').length > 0){
-		circular('#svg_diff');
+		chord('#svg_diff');
 	}
 
 	if($('#force').length > 0){
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
  * Created by Video on 2016.11.04..
  */
 
-function circular(param) {
+function chord(param) {
 
 
 

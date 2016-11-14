@@ -1,12 +1,12 @@
 @extends('layout.default')
 
 @section('content')
-    <section id="projektek">
+    <section id="subprokects">
         <div class="container">
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1>Alrojektek</h1>
+                    <h1>Alprojektek</h1>
                     <a class="btn btn-primary btn-xs text-right" href="/project/{!! $projectid !!}/subproject/create">
                         <span class="glyphicon glyphicon-plus"></span> Új hozzáadása
                     </a>

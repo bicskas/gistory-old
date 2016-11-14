@@ -2,7 +2,7 @@
  * Created by Video on 2016.11.04..
  */
 
-function circular(param) {
+function chord(param) {
 
 
 
