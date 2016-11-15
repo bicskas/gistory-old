@@ -93,24 +93,42 @@ function set_nodeCluster($subproject)
 	foreach ($nodes as $node) {
 		$triangles = 0;
 		$nodeattribute = $node->subproject()->where('subproject_id', $subproject->id)->first()->pivot;
+
 		$edges = $subproject->edge()->where(function ($q) use ($node) {
 			$q->where('node1_id', $node->id)->orWhere('node2_id', $node->id);
 		})->get();
-		foreach ($edges as $edge1){
+
+		$marvolt = [];
+		foreach ($edges as $edge1) {
 			$neighbour1 = $edge1->node1_id != $node->id ? $edge1->node1_id : $edge1->node2_id;
-			foreach ($edges as $edge2){
+			foreach ($edges as $edge2) {
 				$neighbour2 = $edge2->node1_id != $node->id ? $edge2->node1_id : $edge2->node2_id;
-				if(Edge::where('subproject_id', $subproject->id)->where(function ($query) use ($neighbour1) {
-					$query->where('node1_id', $neighbour1)->orWhere('node2_id', $neighbour1);
-				})->where(function ($query) use ($neighbour2) {
-					$query->where('node1_id', $neighbour2)->orWhere('node2_id', $neighbour2);
-				})->first()){
-					$triangles++;
+				if ($neighbour1 != $neighbour2) {
+					$result = App\Edge::where('subproject_id', $subproject->id)->where(function ($query) use ($neighbour1) {
+						$query->where('node1_id', $neighbour1)->orWhere('node2_id', $neighbour1);
+					})->where(function ($query) use ($neighbour2) {
+						$query->where('node1_id', $neighbour2)->orWhere('node2_id', $neighbour2);
+					})->whereNotIn('id', $marvolt)->first();
+					if ($result) {
+						$marvolt[] = $result->id;
+						$triangles++;
+					}
 				}
 			}
 		}
-		$nodeattribute->clustering = (2*$triangles)/($nodeattribute->degree*($nodeattribute->degree-1));
+		$nodeattribute->clustering = (2 * $triangles) / ($nodeattribute->degree * ($nodeattribute->degree - 1));
 		$nodeattribute->save();
 	}
 }
 
+function set_subprojectCluster($subproject)
+{
+	$nodes = $subproject->node;
+	$clustering = 0;
+	foreach ($nodes as $node) {
+		$clustering += $node->pivot->clustering;
+	}
+	
+	$subproject->clustering = $clustering / count($nodes);
+	$subproject->save();
+}

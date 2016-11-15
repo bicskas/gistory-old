@@ -186,7 +186,7 @@ class NetworkController extends Controller
 		$data = $request->all();
 		$model->fill($data)->project()->associate($projectid)->save();
 		$project = Project::find($projectid);
-		foreach ($project->subproject as $sub){
+		foreach ($project->subproject as $sub) {
 			$sub->node()->sync($project->node);
 		}
 
@@ -206,6 +206,7 @@ class NetworkController extends Controller
 		$subproject->edge()->save($edge);
 		set_degree($subproject);
 		set_nodeCluster($subproject);
+		set_subprojectCluster($subproject);
 
 		return redirect('/network/' . $projectid . '/' . $subprojectid)
 			->with('uzenet', 'Sikeres mentette a kapcsolatot!');
