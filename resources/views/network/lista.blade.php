@@ -52,9 +52,6 @@
                             <a href="#edge" aria-controls="edge" role="tab" data-toggle="tab">Élek</a>
                         </li>
                         <li role="presentation">
-                            <a href="#download" aria-controls="download" role="tab" data-toggle="tab">Letöltés</a>
-                        </li>
-                        <li role="presentation">
                             <a href="#svg-kep" aria-controls="download" role="tab" data-toggle="tab">Chord</a>
                         </li>
                         <li role="presentation">

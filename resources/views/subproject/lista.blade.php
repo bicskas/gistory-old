@@ -24,6 +24,12 @@
                                     <div class="panel-heading">{!! $l->nev !!}</div>
                                     <div class="panel-body">
                                         {!! $l->leiras !!}
+                                        <br>
+                                        <ul>
+                                            <li>Csúcsok száma: {!! $l->node()->count() !!} db</li>
+                                            <li>Élek száma: {!! $l->edge()->count() !!} db</li>
+                                            <li>Klaszter: {!! $l->clustering !!}</li>
+                                        </ul>
                                     </div>
                                     <div class="panel-footer">
                                         <a class="btn btn-default btn-xs text-right"

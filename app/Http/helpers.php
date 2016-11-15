@@ -128,7 +128,7 @@ function set_subprojectCluster($subproject)
 	foreach ($nodes as $node) {
 		$clustering += $node->pivot->clustering;
 	}
-	
+
 	$subproject->clustering = $clustering / count($nodes);
 	$subproject->save();
 }
