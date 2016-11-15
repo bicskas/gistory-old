@@ -57,7 +57,7 @@ class NetworkController extends Controller
 
 		}
 		foreach ($subproject->edge as $e) {
-			$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => 1];
+			$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => $e->weight];
 		}
 
 		$file = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . ".json";
