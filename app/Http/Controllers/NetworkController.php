@@ -205,6 +205,7 @@ class NetworkController extends Controller
 		$edge->weight = $request->get('weight');
 		$subproject->edge()->save($edge);
 		set_degree($subproject);
+		set_nodeCluster($subproject);
 
 		return redirect('/network/' . $projectid . '/' . $subprojectid)
 			->with('uzenet', 'Sikeres mentette a kapcsolatot!');

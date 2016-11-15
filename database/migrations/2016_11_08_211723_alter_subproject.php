@@ -14,7 +14,6 @@ class AlterSubproject extends Migration
 	{
 		Schema::table('subproject', function (Blueprint $table) {
 			$table->float('clustering')->nullable();
-			$table->float('transitivity')->nullable();
 		});
 	}
 
@@ -27,7 +26,6 @@ class AlterSubproject extends Migration
 	{
 		Schema::table('subproject', function (Blueprint $table) {
 			$table->dropColumn('clustering');
-			$table->dropColumn('transitivity');
 		});
 	}
 }
