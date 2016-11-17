@@ -84,7 +84,7 @@ class NetworkController extends Controller
 
 		$project = Project::find($projectid);
 
-		$marvolt = [];
+		$exist = [];
 		$same = [];
 		$diff = [];
 		$results = [];
@@ -99,9 +99,9 @@ class NetworkController extends Controller
 				$query->where('node1_id', $edge->node1_id)->orWhere('node2_id', $edge->node1_id);
 			})->where(function ($query) use ($edge) {
 				$query->where('node1_id', $edge->node2_id)->orWhere('node2_id', $edge->node2_id);
-			})->whereNotIn('id', $marvolt)->get();
+			})->whereNotIn('id', $exist)->get();
 			foreach ($result as $e) {
-				$marvolt[] = $e->id;
+				$exist[] = $e->id;
 			}
 			$results[] = $result;
 		}

@@ -98,7 +98,7 @@ function set_nodeCluster($subproject)
 			$q->where('node1_id', $node->id)->orWhere('node2_id', $node->id);
 		})->get();
 
-		$marvolt = [];
+		$exist = [];
 		foreach ($edges as $edge1) {
 			$neighbour1 = $edge1->node1_id != $node->id ? $edge1->node1_id : $edge1->node2_id;
 			foreach ($edges as $edge2) {
@@ -108,9 +108,9 @@ function set_nodeCluster($subproject)
 						$query->where('node1_id', $neighbour1)->orWhere('node2_id', $neighbour1);
 					})->where(function ($query) use ($neighbour2) {
 						$query->where('node1_id', $neighbour2)->orWhere('node2_id', $neighbour2);
-					})->whereNotIn('id', $marvolt)->first();
+					})->whereNotIn('id', $exist)->first();
 					if ($result) {
-						$marvolt[] = $result->id;
+						$exist[] = $result->id;
 						$triangles++;
 					}
 				}

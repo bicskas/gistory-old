@@ -59,7 +59,7 @@
                         </li>
                         <li role="presentation">
                             <a href="#statisztika" aria-controls="download" role="tab"
-                               data-toggle="tab">Fokszámeloszlás</a>
+                               data-toggle="tab">Eloszlások</a>
                         </li>
                     </ul>
 
