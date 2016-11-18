@@ -39,10 +39,10 @@ Route::group(['middleware' => ['web']], function () {
 		'password' => 'Auth\PasswordController',
 	]);
 
+	Route::get('/', 'FooldalController@index');
 
 	Route::group(['middleware' => 'auth'], function ($router) {
 		Route::get('/home', 'FooldalController@index');
-		Route::get('/', 'FooldalController@index');
 		Route::get('/project', 'ProjectController@index');
 		Route::get('/project/{id}/subproject', 'ProjectController@subproject');
 		Route::get('/network/compare/{projectid}', 'NetworkController@compare');
