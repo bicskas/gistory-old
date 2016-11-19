@@ -1,27 +1,28 @@
-header{
-  .navbar{
+header {
+  .navbar {
     border: none;
     border-radius: 0;
     background-color: $kek;
 
-    .navbar-brand{
-        color: $feher;
-        text-transform: uppercase;
+    .navbar-brand {
+      color: $feher;
+      text-transform: uppercase;
     }
 
-    .navbar-nav{
-      li{
-        a{
+    .navbar-nav {
+      li {
+        color: $feher;
+
+        a {
           color: $feher;
 
-          &:hover{
+          &:hover {
             color: #ddd;
           }
         }
       }
     }
   }
-
 }
 
 

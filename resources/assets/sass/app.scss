@@ -7,6 +7,12 @@
 @import "nodes/_bar.scss";
 @import "_bootstrap-select.scss";
 
+
+
+html{
+  opacity: 1 !important;
+}
+
 body {
   background-color: $gray-lighter;
 }

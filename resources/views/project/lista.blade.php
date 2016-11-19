@@ -15,7 +15,7 @@
 
                     <div class="row">
                         <h4>Saját projektek</h4>
-                        @foreach($lista as $l)
+                        @foreach($lista as $n => $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">{!! $l->cim !!}</div>
@@ -43,13 +43,15 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @if(($n+1)%2 == 0)
+                                <div class="clearfix"></div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="row">
                         <h4>Velem megosztott projektek</h4>
 
-                        @foreach($shared as $l)
+                        @foreach($shared as $n => $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">{!! $l->cim !!}</div>
@@ -77,7 +79,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @if(($n+1)%2 == 0)
+                                <div class="clearfix"></div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

@@ -5757,10 +5757,12 @@ header .navbar {
   header .navbar .navbar-brand {
     color: #fff;
     text-transform: uppercase; }
-  header .navbar .navbar-nav li a {
+  header .navbar .navbar-nav li {
     color: #fff; }
-    header .navbar .navbar-nav li a:hover {
-      color: #ddd; }
+    header .navbar .navbar-nav li a {
+      color: #fff; }
+      header .navbar .navbar-nav li a:hover {
+        color: #ddd; }
 
 footer {
   background-color: #444; }
@@ -6081,6 +6083,9 @@ footer {
   margin-bottom: 0;
   width: 100%;
   float: none; }
+
+html {
+  opacity: 1 !important; }
 
 body {
   background-color: #eeeeee; }
