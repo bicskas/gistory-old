@@ -51,7 +51,9 @@ function chord(param) {
 			.each(function (d) {
 				d.source = d[0], d.target = d[d.length - 1];
 			})
-			.attr("class", "link")
+			.attr("class", function (d) {
+				return "link " + d.source.size;
+				})
 			.attr("d", line);
 
 		node = node

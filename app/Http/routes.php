@@ -79,10 +79,10 @@ Route::group(['middleware' => ['web']], function () {
 //		});
 
 	// ----- egyéb szövegek -----
-//	Route::bind('szoveg_link', function($link) {
-//		$model = App\Szoveg::whereLink($link)->first();
-//		return $model ?: abort(404);
-//	});
-//	Route::get('{szoveg_link}', array('uses' => 'SzovegController@index'));
+	Route::bind('szoveg_link', function($link) {
+		$model = App\Szoveg::whereLink($link)->first();
+		return $model ?: abort(404);
+	});
+	Route::get('{szoveg_link}', array('uses' => 'SzovegController@index'));
 });
 
