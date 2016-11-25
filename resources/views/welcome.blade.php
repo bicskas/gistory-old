@@ -8,10 +8,9 @@
                 A gistory egy hálózatok ábrázolására, elemzésére és összehasonlítására szolgáló weboldal, amely egy TDK
                 munka kapcsán készült el.
             </p>
-            <p>Az oldal jelenleg fejlesztés alatt áll, ezért előfurdulhat, hogy bizonyos funkciók nem működnek megfelelően.</p>
+            <p>Az oldal jelenleg fejlesztés alatt áll, ezért előfurdulhat, hogy bizonyos funkciók nem működnek
+                megfelelően.</p>
         </div>
-
-        <div></div>
     </section>
 
 

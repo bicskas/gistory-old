@@ -1,13 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,400italic&subset=latin,latin-ext);
+//@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500,300,400italic&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,400i,600,700&subset=latin-ext);
 @import "_bootstrap.scss";
+@import "_animation_mixin.scss";
 @import "_header.scss";
 @import "_footer.scss";
-@import "nodes/_circular.scss";
-@import "nodes/_force.scss";
-@import "nodes/_bar.scss";
+@import "graph/_circular.scss";
+@import "graph/_force.scss";
+@import "graph/_bar.scss";
 @import "_bootstrap-select.scss";
-
-
 
 html{
   opacity: 1 !important;
@@ -17,14 +17,20 @@ body {
   background-color: $gray-lighter;
 }
 
+h1,h2,h3{
+  color: $kek;
+  text-transform: uppercase;
+}
+
+.panel-body{
+  min-height: 60px;
+}
+
 #stocks-chart {
 
     height: 100% !important;
     width: 100% !important;
 }
-
-
-
 
 /* Top and Bottom borders go out */
 div.topBotomBordersOut a:before, div.topBotomBordersOut a:after
@@ -57,3 +63,45 @@ div.topBotomBordersOut a:hover:before, div.topBotomBordersOut a:hover:after
   transform: translateY(0px);
 }
 
+
+.btn{
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(240,240,240,0.2);
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.btn.btn-default:before{
+  background: rgba(0,0,0,0.1);
+}
+
+.btn:hover:before, .btn:focus:before, .btn:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}

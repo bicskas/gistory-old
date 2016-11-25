@@ -7,6 +7,7 @@ Homestead.json
 #public/userfiles/*
 #public/build/*
 #public/css/*
-#public/js/*
+public/json
+public/json/*
 .idea/*
 

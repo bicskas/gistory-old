@@ -13,11 +13,16 @@ header {
       li {
         color: $feher;
 
-        a {
+        > a {
           color: $feher;
 
           &:hover {
             color: #ddd;
+          }
+        }
+        .dropdown-menu{
+          >li a{
+            color: $kek;
           }
         }
       }

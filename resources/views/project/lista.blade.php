@@ -14,13 +14,13 @@
                 <div class="panel-body">
 
                     <div class="row">
-                        <h4>Saját projektek</h4>
+                        <h3 class="text-center">Saját projektek</h3>
                         @foreach($lista as $n => $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">{!! $l->cim !!}</div>
+                                    <div class="panel-heading"><h5>{!! $l->cim !!}</h5></div>
                                     <div class="panel-body">
-                                        {!! $l->leiras !!}
+                                        {!! $l->leiras != "" ? $l->leiras : 'Ehhez a projekthez nem tartozik leírás' !!}
                                     </div>
                                     <div class="panel-footer">
                                         <a class="btn btn-default btn-xs text-right" href="{{$l->createLink()}}/edit">
@@ -49,14 +49,14 @@
                         @endforeach
                     </div>
                     <div class="row">
-                        <h4>Velem megosztott projektek</h4>
+                        <h3 class="text-center">Velem megosztott projektek</h3>
 
                         @foreach($shared as $n => $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">{!! $l->cim !!}</div>
+                                    <div class="panel-heading"><h5>{!! $l->cim !!}</h5></div>
                                     <div class="panel-body">
-                                        {!! $l->leiras !!}
+                                        {!! $l->leiras != '' ? $l->leiras : 'Ehhez a projekthez nem tartozik leírás' !!}
                                     </div>
                                     <div class="panel-footer">
                                         <a class="btn btn-default btn-xs text-right" href="{{$l->createLink()}}/edit">

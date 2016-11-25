@@ -14,11 +14,11 @@
                 <div class="panel-body">
 
                     <div class="row">
-                        <h2>Saját csoportok</h2>
+                        <h3 class="text-center">Saját csoportok</h3>
                         @foreach($lista as $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">{!! $l->name !!}</div>
+                                    <div class="panel-heading"><h5>{!! $l->name !!}</h5></div>
                                     <div class="panel-body">
                                         {!! $l->leiras !!}
                                     </div>
@@ -37,11 +37,11 @@
                     </div>
 
                     <div class="row">
-                        <h2>Csoport tagságok</h2>
+                        <h3 class="text-center">Csoport tagságok</h3>
                         @foreach($teams as $l)
                             <div class="col-sm-6" id="item_{!! $l->id !!}">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">{!! $l->name !!}</div>
+                                    <div class="panel-heading"><h5>{!! $l->name !!}</h5></div>
                                     <div class="panel-body">
                                         {!! $l->leiras !!}
                                     </div>
