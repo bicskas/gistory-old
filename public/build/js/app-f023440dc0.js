@@ -33,33 +33,55 @@ jQuery(document).ready(function ($) {
 		});
 
 
-		/*
+	var $node1_mezo = $('#nev1');
+	if ($node1_mezo.length) {
+		var node1 = new Bloodhound({
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: '/kereses/keres/1/%nev',
+				wildcard: '%nev'
+			},
+			limit: 20
+		});
 
-		 var $kereses_mezo = $('#nev1');
-		 if ($kereses_mezo.length) {
-		 var kepviselok = new Bloodhound({
-		 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
-		 queryTokenizer: Bloodhound.tokenizers.whitespace,
-		 remote: {
-		 url: '/kereses/'+ $kereses_mezo.data('projectid')+'/%nev',
-		 wildcard: '%nev'
-		 },
-		 limit: 20
-		 });
+		node1.initialize();
 
-		 kepviselok.initialize();
+		$node1_mezo.typeahead(null, {
+			name: 'node-nev',
+			displayKey: 'nev',
+			source: node1.ttAdapter(),
+			hint: true,
+			highlight: true,
+			minLength: 2,
+			limit: 10
+		});
+	}
 
-		 $('#typeahead .typeahead').typeahead(null, {
-		 name: 'kepviselo-nev',
-		 displayKey: 'nev',
-		 source: kepviselok.ttAdapter(),
-		 hint: true,
-		 highlight: true,
-		 minLength: 2,
-		 limit: 10
-		 });
-		 }
-		 */
+	var $node2_mezo = $('#nev2');
+	if ($node2_mezo.length) {
+		var node2 = new Bloodhound({
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: '/kereses/keres/1/%nev',
+				wildcard: '%nev'
+			},
+			limit: 20
+		});
+
+		node2.initialize();
+
+		$node2_mezo.typeahead(null, {
+			name: 'node-nev',
+			displayKey: 'nev',
+			source: node2.ttAdapter(),
+			hint: true,
+			highlight: true,
+			minLength: 2,
+			limit: 10
+		});
+	}
 
 		//----------------------------ábrák megjelenítése---------------
 

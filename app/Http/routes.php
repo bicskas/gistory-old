@@ -61,6 +61,7 @@ Route::group(['middleware' => ['web']], function () {
 //	Route::resource('network', 'NetworkController');
 		Route::get('/download/{projectid}/nodes', 'NetworkController@downloadNode');
 		Route::get('/download/{projectid}/edges', 'NetworkController@downloadEdge');
+		Route::any('/kereses/keres/{project}/{nev}', array('as' => 'kereses','uses' => 'KeresesController@node'));
 	});
 
 	// ----- menü route-ok generálása -----

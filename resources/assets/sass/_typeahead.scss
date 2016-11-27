@@ -1,0 +1,32 @@
+
+.twitter-typeahead {
+  width: 100%;
+  height: 100%;
+}
+
+.tt-menu {
+  right: 0;
+  background: #fff;
+  border: 1px solid $gray;
+}
+
+.tt-suggestion {
+  color: $kek;
+  padding: $padding-base-vertical $padding-base-horizontal;
+
+  &+.tt-suggestion {
+    border-top: 1px solid $gray;
+  }
+  .tt-highlight{
+    font-weight: bold;
+  }
+}
+
+.tt-selectable {
+  cursor: pointer;
+
+  &:hover {
+    background: $kek;
+    color: #fff;
+  }
+}

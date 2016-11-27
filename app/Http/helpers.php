@@ -116,7 +116,7 @@ function set_nodeCluster($subproject)
 				}
 			}
 		}
-		$nodeattribute->clustering = (2 * $triangles) / ($nodeattribute->degree * ($nodeattribute->degree - 1));
+		$nodeattribute->clustering = ($nodeattribute->degree * ($nodeattribute->degree - 1)) == 0 ? 0 :(2 * $triangles) / ($nodeattribute->degree * ($nodeattribute->degree - 1));
 		$nodeattribute->save();
 	}
 }

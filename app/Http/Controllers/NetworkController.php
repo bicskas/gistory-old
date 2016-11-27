@@ -189,7 +189,11 @@ class NetworkController extends Controller
 		foreach ($project->subproject as $sub) {
 			$sub->node()->sync($project->node);
 		}
-
+		foreach ($project->subproject as $subproject) {
+			set_degree($subproject);
+			set_nodeCluster($subproject);
+			set_subprojectCluster($subproject);
+		}
 //		$model->project()->associate($projectid)->save();
 
 		return redirect('/network/' . $projectid)
