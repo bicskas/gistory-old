@@ -26,7 +26,6 @@ class KeresesController extends Controller
 	public function node($project,$nev)
 	{
 		$nodes = $project->node()->where('nev', 'LIKE', '%' . $nev . '%')->get();
-
 		return json_encode($nodes);
 	}
 

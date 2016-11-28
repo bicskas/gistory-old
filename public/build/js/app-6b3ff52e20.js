@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
 			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: '/kereses/keres/1/%nev',
+				url: '/kereses/keres/'+ $node1_mezo.data('projectid') +'/%nev',
 				wildcard: '%nev'
 			},
 			limit: 20
@@ -64,7 +64,7 @@ jQuery(document).ready(function ($) {
 			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: '/kereses/keres/1/%nev',
+				url: '/kereses/keres/'+ $node2_mezo.data('projectid') +'/%nev',
 				wildcard: '%nev'
 			},
 			limit: 20
