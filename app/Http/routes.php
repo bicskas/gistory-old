@@ -44,7 +44,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::group(['middleware' => 'auth'], function ($router) {
 		Route::get('/home', 'FooldalController@index');
 		Route::get('/project', 'ProjectController@index');
-		Route::get('/project/{id}/subproject', 'ProjectController@subproject');
+		//Route::get('/project/{id}/subproject', 'ProjectController@subproject');
 		Route::get('/network/compare/{projectid}', 'NetworkController@compare');
 		Route::get('/network/{projectid}', 'NetworkController@index');
 		Route::get('/network/deleteedge/{edgeid}', 'NetworkController@deleteEdge')->name('deleteedge');
