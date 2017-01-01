@@ -59,14 +59,14 @@
                         </li>
                         <li role="presentation">
                             <a href="#statisztika" aria-controls="download" role="tab"
-                               data-toggle="tab">Eloszlások</a>
+                               data-toggle="tab">Eloszlások felsorolása</a>
                         </li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="node">
-                            @include('elemek.network.node')
+                            @include('elemek.network.subproject_node')
                         </div>
                         <div role="tabpanel" class="tab-pane" id="edge">
                             @include('elemek.network.edge')

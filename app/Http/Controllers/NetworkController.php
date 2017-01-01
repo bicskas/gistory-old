@@ -4,6 +4,7 @@ use App\Edge;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\Node as Model;
+use App\Node;
 use App\Http\Requests\ModelRequest;
 use App\Subproject;
 use File;
@@ -32,7 +33,7 @@ class NetworkController extends Controller
 		));
 	}
 
-
+	//Ábrákhoz tömbök lérehozása
 	public function subprojectedge($projectid, $subprojectid)
 	{
 
@@ -44,13 +45,13 @@ class NetworkController extends Controller
 
 		foreach ($nodes as $n) {
 			$targets = [];
-			$force['nodes'][] = ['id' => $n->nev, 'group' => 1];
+			$force['nodes'][] = ['id' => $n->nev, 'group' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group];
 
 			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
-				$targets[] = $e->nev;
+				$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$e->nev;
 			}
 
-			$chord[] = ['name' => $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
 			$nevek[] = $n->nev;
 			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
@@ -78,6 +79,18 @@ class NetworkController extends Controller
 			'degree' => json_encode($degree),
 		));
 	}
+
+	public function saveGroup(ModelRequest $request, Model $model, $projectid, $subprojectid)
+	{
+		$groups = $request->get('csoport');
+		foreach ($groups as $nodeid => $group) {
+			$node = Node::find($nodeid);
+			$node->subproject()->updateExistingPivot($subprojectid,['group' => $group]);
+		}
+
+		return redirect()->back();
+	}
+
 
 	public function compare($projectid)
 	{
