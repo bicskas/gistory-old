@@ -83,12 +83,14 @@ jQuery(document).ready(function ($) {
 			});
 		}
 
+		abra();
+
 		//---------------------------Küszöbölés ajaxxal-----------------
 		$("#fokszam-slider").slider({
-			id : 'fokszam-slider-szin'
+			id: 'fokszam-slider-szin'
 		});
 
-		$("#fokszam-slider").on('slideStop',function () {
+		$("#fokszam-slider").on('slideStop', function () {
 			console.log($("#fokszam-slider").val());
 
 
@@ -99,7 +101,8 @@ jQuery(document).ready(function ($) {
 				data: $this.serialize(),
 				dataType: 'html',
 				success: function (resp) {
-					$('abrak-tab').html(resp);
+					$('#abrak-tab').html(resp);
+					abra();
 				},
 				error: function () {
 					alert('Hiba történt');
@@ -109,34 +112,36 @@ jQuery(document).ready(function ($) {
 
 
 		//----------------------------ábrák megjelenítése---------------
+		function abra() {
 
-		($('#svg').length > 0)
-		{
-			chord('#svg');
-		}
+			($('#svg').length > 0)
+			{
+				chord('#svg');
+			}
 
-		if ($('#svg_same').length > 0) {
-			chord('#svg_same');
-		}
+			if ($('#svg_same').length > 0) {
+				chord('#svg_same');
+			}
 
-		if ($('#svg_diff').length > 0) {
-			chord('#svg_diff');
-		}
+			if ($('#svg_diff').length > 0) {
+				chord('#svg_diff');
+			}
 
-		if ($('#force').length > 0) {
-			force('#force');
-		}
+			if ($('#force').length > 0) {
+				force('#force');
+			}
 
-		if ($('#force_same').length > 0) {
-			force('#force_same');
-		}
+			if ($('#force_same').length > 0) {
+				force('#force_same');
+			}
 
-		if ($('#force_diff').length > 0) {
-			force('#force_diff');
-		}
+			if ($('#force_diff').length > 0) {
+				force('#force_diff');
+			}
 
-		if ($('#bar').length > 0) {
-			bar();
+			if ($('#bar').length > 0) {
+				bar();
+			}
 		}
 
 		$('.bs-select').selectpicker({
@@ -147,3 +152,7 @@ jQuery(document).ready(function ($) {
 
 	}
 );
+
+
+//-----------------
+

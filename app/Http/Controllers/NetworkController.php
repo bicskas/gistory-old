@@ -48,10 +48,10 @@ class NetworkController extends Controller
 			$force['nodes'][] = ['id' => $n->nev, 'group' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group];
 
 			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
-				$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$e->nev;
+				$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group . ' * ' . $e->nev;
 			}
 
-			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group . ' * ' . $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
 			$nevek[] = $n->nev;
 			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
@@ -77,6 +77,7 @@ class NetworkController extends Controller
 			'forcefile' => $forcefile,
 			'nevek' => json_encode($nevek),
 			'degree' => json_encode($degree),
+			'degrees' => $degree,
 		));
 	}
 
@@ -84,14 +85,16 @@ class NetworkController extends Controller
 
 	public function kuszob(Request $request, $projectid, $subprojectid)
 	{
-
-		$values = explode(',',$request->get('fokszam-slider'));
+		$this->auto_render = false;
+		$values = explode(',', $request->get('fokszam-slider'));
 		$min = $values[0];
 		$max = $values[1];
 
 		$subproject = Subproject::find($subprojectid);
 
-		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
+//		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
+
+		$nodes = $subproject->node()->wherePivot('degree', '>=', $min)->wherePivot('degree', '<=', $max)->orderBy('nev')->get();
 		$chord = [];
 		$force = ['nodes' => [], 'links' => []];
 
@@ -100,17 +103,21 @@ class NetworkController extends Controller
 			$force['nodes'][] = ['id' => $n->nev, 'group' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group];
 
 			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
-				$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$e->nev;
+				if ($e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree >= $min && $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree <= $max) {
+					$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group . ' * ' . $e->nev;
+				}
 			}
 
-			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group . ' * ' . $n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
 
 			$nevek[] = $n->nev;
 			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
 
 		}
 		foreach ($subproject->edge as $e) {
-			$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => $e->weight];
+			if ($e->node1->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree >= $min && $e->node1-> subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree <= $max && $e->node2->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree >= $min && $e->node2-> subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree <= $max) {
+				$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => $e->weight];
+			}
 		}
 
 		$file = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . ".json";
@@ -119,7 +126,7 @@ class NetworkController extends Controller
 		$forcefile = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . "force.json";
 		File::put($forcefile, json_encode($force));
 
-		return view('network.lista', array(
+		return view('network.tab', array(
 			'nodes' => $nodes,
 			'projectid' => $projectid,
 			'subproject' => $subproject,
@@ -129,6 +136,7 @@ class NetworkController extends Controller
 			'forcefile' => $forcefile,
 			'nevek' => json_encode($nevek),
 			'degree' => json_encode($degree),
+			'degrees' => $degree,
 		));
 	}
 
@@ -139,7 +147,7 @@ class NetworkController extends Controller
 		$groups = $request->get('csoport');
 		foreach ($groups as $nodeid => $group) {
 			$node = Node::find($nodeid);
-			$node->subproject()->updateExistingPivot($subprojectid,['group' => $group]);
+			$node->subproject()->updateExistingPivot($subprojectid, ['group' => $group]);
 		}
 
 		return redirect()->back();
@@ -511,3 +519,4 @@ class NetworkController extends Controller
 	}
 
 }
+

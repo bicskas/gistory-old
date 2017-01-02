@@ -26,9 +26,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($nodes as $node)
+        @foreach ($nodes as $n => $node)
             <tr id="item_{{$node->id}}">
-                <td>{!! $node->nev !!}</td>
+                <td>{!! $node->nev !!} [Fokszám: {!! $degrees[$n] !!}]</td>
                 <td>
                     <div class="form-group">
                         {{--{{ Form::label('csoport', 'Csoport: ') }}--}}

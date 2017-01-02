@@ -66,11 +66,11 @@
 
                     <h5>Küszöbölés a fokszámra</h5>
                     {!! Form::open(['id' => 'kuszob-node','url' => "/network/$projectid/$subproject->id/kuszob",'method' => 'POST']) !!}
-                    <b>10 </b> <input id="fokszam-slider" name="fokszam-slider" type="text" class="span2" value=""
-                                      data-slider-min="10" data-slider-max="100"
+                    <b>{!! min($degrees) !!} </b> <input id="fokszam-slider" name="fokszam-slider" type="text" class="span2" value=""
+                                      data-slider-min="{!! min($degrees) !!}" data-slider-max="{!! max($degrees) !!}"
                                       data-slider-step="1"
-                                      data-slider-value="[11,99]"/>
-                    <b> 100</b>
+                                      data-slider-value="[{!! min($degrees) !!},{!! max($degrees) !!}]"/>
+                    <b> {!! max($degrees) !!}</b>
                 {!! Form::close() !!}
 
                 <!-- Tab panes -->
