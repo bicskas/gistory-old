@@ -51,7 +51,7 @@ class Node extends Model
 
 	public function subproject()
 	{
-		return $this->belongsToMany('App\Subproject','nodeattribute','node_id','subproject_id')->withPivot('degree','weightdegree','clustering');
+		return $this->belongsToMany('App\Subproject','nodeattribute','node_id','subproject_id')->withPivot('degree','weightdegree','clustering','group');
 	}
 
 	/*public function scopeAttribute($query,$subproject){

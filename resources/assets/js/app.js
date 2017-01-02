@@ -33,85 +33,115 @@ jQuery(document).ready(function ($) {
 		});
 
 
-	var $node1_mezo = $('#nev1');
-	if ($node1_mezo.length) {
-		var node1 = new Bloodhound({
-			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			remote: {
-				url: '/kereses/keres/'+ $node1_mezo.data('projectid') +'/%nev',
-				wildcard: '%nev'
-			},
-			limit: 20
+		var $node1_mezo = $('#nev1');
+		if ($node1_mezo.length) {
+			var node1 = new Bloodhound({
+				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				remote: {
+					url: '/kereses/keres/' + $node1_mezo.data('projectid') + '/%nev',
+					wildcard: '%nev'
+				},
+				limit: 20
+			});
+
+			node1.initialize();
+
+			$node1_mezo.typeahead(null, {
+				name: 'node-nev',
+				displayKey: 'nev',
+				source: node1.ttAdapter(),
+				hint: true,
+				highlight: true,
+				minLength: 2,
+				limit: 10
+			});
+		}
+
+		var $node2_mezo = $('#nev2');
+		if ($node2_mezo.length) {
+			var node2 = new Bloodhound({
+				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				remote: {
+					url: '/kereses/keres/' + $node2_mezo.data('projectid') + '/%nev',
+					wildcard: '%nev'
+				},
+				limit: 20
+			});
+
+			node2.initialize();
+
+			$node2_mezo.typeahead(null, {
+				name: 'node-nev',
+				displayKey: 'nev',
+				source: node2.ttAdapter(),
+				hint: true,
+				highlight: true,
+				minLength: 2,
+				limit: 10
+			});
+		}
+
+		abra();
+
+		//---------------------------Küszöbölés ajaxxal-----------------
+		$("#fokszam-slider").slider({
+			id: 'fokszam-slider-szin'
 		});
 
-		node1.initialize();
+		$("#fokszam-slider").on('slideStop', function () {
+			console.log($("#fokszam-slider").val());
 
-		$node1_mezo.typeahead(null, {
-			name: 'node-nev',
-			displayKey: 'nev',
-			source: node1.ttAdapter(),
-			hint: true,
-			highlight: true,
-			minLength: 2,
-			limit: 10
-		});
-	}
 
-	var $node2_mezo = $('#nev2');
-	if ($node2_mezo.length) {
-		var node2 = new Bloodhound({
-			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			remote: {
-				url: '/kereses/keres/'+ $node2_mezo.data('projectid') +'/%nev',
-				wildcard: '%nev'
-			},
-			limit: 20
+			$this = $('#kuszob-node');
+			$.ajax({
+				url: $this.attr('action'),
+				method: 'POST',
+				data: $this.serialize(),
+				dataType: 'html',
+				success: function (resp) {
+					$('#abrak-tab').html(resp);
+					abra();
+				},
+				error: function () {
+					alert('Hiba történt');
+				}
+			});
 		});
 
-		node2.initialize();
-
-		$node2_mezo.typeahead(null, {
-			name: 'node-nev',
-			displayKey: 'nev',
-			source: node2.ttAdapter(),
-			hint: true,
-			highlight: true,
-			minLength: 2,
-			limit: 10
-		});
-	}
 
 		//----------------------------ábrák megjelenítése---------------
+		function abra() {
 
-		($('#svg').length > 0)
-		{
-			chord('#svg');
-		}
+			($('#svg').length > 0)
+			{
+				chord('#svg');
+			}
 
-		if ($('#svg_same').length > 0) {
-			chord('#svg_same');
-		}
+			if ($('#svg_same').length > 0) {
+				chord('#svg_same');
+			}
 
-		if ($('#svg_diff').length > 0) {
-			chord('#svg_diff');
-		}
+			if ($('#svg_diff').length > 0) {
+				chord('#svg_diff');
+			}
 
-		if ($('#force').length > 0) {
-			force('#force');
-		}
+			if ($('#force').length > 0) {
+				force('#force');
+			}
 
-		if ($('#force_same').length > 0) {
-			force('#force_same');
-		}
+			if ($('#force_same').length > 0) {
+				force('#force_same');
+			}
 
-		if ($('#force_diff').length > 0) {
-			force('#force_diff');
-		}
+			if ($('#force_diff').length > 0) {
+				force('#force_diff');
+			}
 
-		if ($('#bar').length > 0) {
-			bar();
+			if ($('#bar').length > 0) {
+				bar();
+			}
 		}
 
 		$('.bs-select').selectpicker({
@@ -122,3 +152,7 @@ jQuery(document).ready(function ($) {
 
 	}
 );
+
+
+//-----------------
+

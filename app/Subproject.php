@@ -51,7 +51,7 @@ class Subproject extends Model
 
 	public function node()
 	{
-		return $this->belongsToMany('App\Node','nodeattribute','subproject_id','node_id')->withPivot('degree','weightdegree','clustering');
+		return $this->belongsToMany('App\Node','nodeattribute','subproject_id','node_id')->withPivot('degree','weightdegree','clustering','group');
 	}
 
 	public function createLink($projectid) {

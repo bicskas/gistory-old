@@ -9,6 +9,7 @@
 @import "graph/_bar.scss";
 @import "_bootstrap-select.scss";
 @import "_typeahead.scss";
+@import "_bootstrap-slider.scss";
 
 
 html{
@@ -106,4 +107,19 @@ div.topBotomBordersOut a:hover:before, div.topBotomBordersOut a:hover:after
 .btn:hover:before, .btn:focus:before, .btn:active:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+
+
+//-----------slider színek-----------------
+#fokszam-slider-szin .slider-track-high {
+  background: $brand-primary;
+}
+
+#fokszam-slider-szin .slider-track-low {
+  background: $brand-info;
+}
+
+#fokszam-slider-szin .slider-selection {
+  background: #ddd;
 }

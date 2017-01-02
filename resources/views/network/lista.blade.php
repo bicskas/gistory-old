@@ -59,14 +59,24 @@
                         </li>
                         <li role="presentation">
                             <a href="#statisztika" aria-controls="download" role="tab"
-                               data-toggle="tab">Eloszlások</a>
+                               data-toggle="tab">Eloszlások felsorolása</a>
                         </li>
                     </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
+
+                    <h5>Küszöbölés a fokszámra</h5>
+                    {!! Form::open(['id' => 'kuszob-node','url' => "/network/$projectid/$subproject->id/kuszob",'method' => 'POST']) !!}
+                    <b>{!! min($degrees) !!} </b> <input id="fokszam-slider" name="fokszam-slider" type="text" class="span2" value=""
+                                      data-slider-min="{!! min($degrees) !!}" data-slider-max="{!! max($degrees) !!}"
+                                      data-slider-step="1"
+                                      data-slider-value="[{!! min($degrees) !!},{!! max($degrees) !!}]"/>
+                    <b> {!! max($degrees) !!}</b>
+                {!! Form::close() !!}
+
+                <!-- Tab panes -->
+                    <div class="tab-content" id="abrak-tab">
                         <div role="tabpanel" class="tab-pane active" id="node">
-                            @include('elemek.network.node')
+                            @include('elemek.network.subproject_node')
                         </div>
                         <div role="tabpanel" class="tab-pane" id="edge">
                             @include('elemek.network.edge')
