@@ -80,6 +80,60 @@ class NetworkController extends Controller
 		));
 	}
 
+	//------------Küszöbölés--------------------
+
+	public function kuszob(Request $request, $projectid, $subprojectid)
+	{
+
+		$values = explode(',',$request->get('fokszam-slider'));
+		$min = $values[0];
+		$max = $values[1];
+
+		$subproject = Subproject::find($subprojectid);
+
+		$nodes = Project::find($projectid)->node()->orderBy('nev')->get();
+		$chord = [];
+		$force = ['nodes' => [], 'links' => []];
+
+		foreach ($nodes as $n) {
+			$targets = [];
+			$force['nodes'][] = ['id' => $n->nev, 'group' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group];
+
+			foreach ($n->edge()->where('edge.subproject_id', '=', $subprojectid)->get() as $e) {
+				$targets[] = $e->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$e->nev;
+			}
+
+			$chord[] = ['name' => $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->group.' * '.$n->nev, 'size' => rand(600, 16000), 'imports' => $targets];
+
+			$nevek[] = $n->nev;
+			$degree[] = $n->subproject()->where('subproject_id', $subproject->id)->first()->pivot->degree;
+
+		}
+		foreach ($subproject->edge as $e) {
+			$force['links'][] = ['source' => $e->node1->nev, 'target' => $e->node2->nev, 'value' => $e->weight];
+		}
+
+		$file = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . ".json";
+		File::put($file, json_encode($chord));
+
+		$forcefile = "json/" . $projectid . '_' . $subproject->id . '_' . \Auth::user()->id . "force.json";
+		File::put($forcefile, json_encode($force));
+
+		return view('network.lista', array(
+			'nodes' => $nodes,
+			'projectid' => $projectid,
+			'subproject' => $subproject,
+			'chord' => json_encode($chord),
+			'force' => json_encode($force),
+			'file' => $file,
+			'forcefile' => $forcefile,
+			'nevek' => json_encode($nevek),
+			'degree' => json_encode($degree),
+		));
+	}
+
+	//---------------------CSoportok mentése----------------------
+
 	public function saveGroup(ModelRequest $request, Model $model, $projectid, $subprojectid)
 	{
 		$groups = $request->get('csoport');

@@ -51,6 +51,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/network/{projectid}/{subprojectid}', 'NetworkController@subprojectedge');
 		Route::post('/network/{projectid}/node', 'NetworkController@createNode');
 		Route::post('/network/{projectid}/{subprojectid}/edge', 'NetworkController@saveEdge');
+		Route::post('/network/{projectid}/{subprojectid}/kuszob', 'NetworkController@kuszob');
 		Route::post('/network/{projectid}/{subprojectid}/group', 'NetworkController@saveGroup')->name('group');
 		Route::resource('project', 'ProjectController');
 		Route::resource('team', 'TeamController');

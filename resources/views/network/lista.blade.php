@@ -63,8 +63,18 @@
                         </li>
                     </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
+
+                    <h5>Küszöbölés a fokszámra</h5>
+                    {!! Form::open(['id' => 'kuszob-node','url' => "/network/$projectid/$subproject->id/kuszob",'method' => 'POST']) !!}
+                    <b>10 </b> <input id="fokszam-slider" name="fokszam-slider" type="text" class="span2" value=""
+                                      data-slider-min="10" data-slider-max="100"
+                                      data-slider-step="1"
+                                      data-slider-value="[11,99]"/>
+                    <b> 100</b>
+                {!! Form::close() !!}
+
+                <!-- Tab panes -->
+                    <div class="tab-content" id="abrak-tab">
                         <div role="tabpanel" class="tab-pane active" id="node">
                             @include('elemek.network.subproject_node')
                         </div>
