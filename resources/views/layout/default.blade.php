@@ -12,7 +12,7 @@
           content="{{isset($og_desc) ? $og_desc : ''}}@yield('og_desc')">
     <meta property="og:title" name="og:title" content="{{isset($og_title) ? $og_title : ''}}@yield('og_title')">
     <meta property="og:image" name="og:image" content="{{isset($og_image) ? $og_image : ''}}@yield('og_image')">
-    <title>{{isset($title) ? $title.' - ' : null}}Gistory</title>
+    <title>{{isset($title) ? $title.' - ' : null}}GistorY</title>
     <link rel="shortcut icon" type="image/png" href="">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
