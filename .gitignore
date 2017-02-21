@@ -10,4 +10,4 @@ Homestead.json
 public/json
 public/json/*
 .idea/*
-
+_ide_helper.php
