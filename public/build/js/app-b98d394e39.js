@@ -150,6 +150,10 @@ jQuery(document).ready(function ($) {
 			liveSearchPlaceholder: '(keresés)'
 		});
 
+		$('.bs-select-no-search').selectpicker({
+			noneSelectedText: '(válasszon)',
+		});
+
 	}
 );
 

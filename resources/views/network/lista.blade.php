@@ -5,9 +5,11 @@
         <div class="container">
             <div class="well">
                 <h4>Alproject: {!! $subproject->nev !!}</h4>
-                <div class="pull-right"><a href="/project/{!! $projectid !!}/subproject" class="btn-info btn btn-xs">
+                <div class="pull-right">
+                    <a href="/project/{!! $projectid !!}/subproject" class="btn-info btn btn-xs">
                         <span class="glyphicon glyphicon-arrow-left"></span> Vissza az alprojektekhez
-                    </a></div>
+                    </a>
+                </div>
             </div>
             <article id="edges-form">
                 <h5>Új él hozzáadása</h5>
@@ -32,6 +34,10 @@
                       {!! Form::radio('type','1',false,['id' => 'direct']) !!}
                       {!! Form::label('direct','Irányított') !!}
                   </div>--}}
+                <div class="form-group col-sm-7">
+                    {!! Form::label('time','Idő') !!}
+                    {!! Form::select('time',[2012,2013,2014,2015,2016],null,['class' => 'form-control bs-select-no-search','multiple']) !!}
+                </div>
                 <div class="form-group col-sm-7">
                     {!! Form::submit('Él hozzáadása',['class' => 'btn btn-primary']) !!}
                 </div>
@@ -66,10 +72,12 @@
 
                     <h5>Küszöbölés a fokszámra</h5>
                     {!! Form::open(['id' => 'kuszob-node','url' => "/network/$projectid/$subproject->id/kuszob",'method' => 'POST']) !!}
-                    <b>{!! min($degrees) !!} </b> <input id="fokszam-slider" name="fokszam-slider" type="text" class="span2" value=""
-                                      data-slider-min="{!! min($degrees) !!}" data-slider-max="{!! max($degrees) !!}"
-                                      data-slider-step="1"
-                                      data-slider-value="[{!! min($degrees) !!},{!! max($degrees) !!}]"/>
+                    <b>{!! min($degrees) !!} </b> <input id="fokszam-slider" name="fokszam-slider" type="text"
+                                                         class="span2" value=""
+                                                         data-slider-min="{!! min($degrees) !!}"
+                                                         data-slider-max="{!! max($degrees) !!}"
+                                                         data-slider-step="1"
+                                                         data-slider-value="[{!! min($degrees) !!},{!! max($degrees) !!}]"/>
                     <b> {!! max($degrees) !!}</b>
                 {!! Form::close() !!}
 

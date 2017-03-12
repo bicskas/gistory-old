@@ -63,8 +63,7 @@ jQuery(document).ready(function ($) {
 			var node2 = new Bloodhound({
 				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nev'),
 				queryTokenizer: Bloodhound.tokenizers.whitespace,
-				remote: {
-					url: '/kereses/keres/' + $node2_mezo.data('projectid') + '/%nev',
+				remote: {url: '/kereses/keres/' + $node2_mezo.data('projectid') + '/%nev',
 					wildcard: '%nev'
 				},
 				limit: 20
@@ -148,6 +147,10 @@ jQuery(document).ready(function ($) {
 			noneSelectedText: '(válasszon)',
 			liveSearch: true,
 			liveSearchPlaceholder: '(keresés)'
+		});
+
+		$('.bs-select-no-search').selectpicker({
+			noneSelectedText: '(válasszon)',
 		});
 
 	}
