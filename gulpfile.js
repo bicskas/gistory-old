@@ -27,7 +27,7 @@ elixir(function (mix) {
 		'd3.min.js',
 		'seiyria-bootstrap-slider/dist/bootstrap-slider.js'
 	], 'public/js/vendor.js', 'public/vendor');
-	mix.scripts(['app.js','circular.js','force_graph.js','bar.js'], 'public/js/app.js');
+	mix.scripts(['app.js','circular.js','force_graph.js','bar.js', 'radar.js'], 'public/js/app.js');
 	mix.version(['css/app.css', 'js/vendor.js', 'js/app.js']);
 	if (!util.env.production) {
 		mix.browserSync({

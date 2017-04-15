@@ -108,6 +108,8 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="statisztika">
+                            <div id="radar" data-radar_data="{{$radar_data}}" >
+                            </div>
                             <div id="bar" data-nevek="{{$nevek}}" data-degree="{!! $degree !!}">
                                 <svg class="chart" width="1000" height="800"></svg>
                             </div>
